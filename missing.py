@@ -216,7 +216,7 @@ def missingData(data):
            'cutaneous_biopsy_lymphatic_invasion_absent',
            'cutaneous_biopsy_lymphatic_invasion_present']
     aux2 = aux[b4]
-    aux2.columns = ["Unknown","Absent","Present"] 
+    aux2.columns = ["Unknown","absent","present"] 
     data.cutaneous_biopsy_lymphatic_invasion = aux2.apply(lambda x: np.argmax(x), axis=1)
 
     b5 = ['cutaneous_biopsy_regression_absent',

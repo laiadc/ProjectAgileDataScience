@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def normalization(train, test):
     '''
@@ -20,13 +21,13 @@ def normalization(train, test):
     #perform the normalization
     for i in desired_columns:
         #train set
-        max_val = max(train[i])
-        min_val = min(train[i])
+        max_val = np.max(train[i])
+        min_val = np.min(train[i])
         train[i] = (train[i]-min_val)/max_val
 
         #test set
-        max_val = max(test[i])
-        min_val = min(test[i])
-        test[i] = (test[i]-min_val)/max
+        max_val = np.max(test[i])
+        min_val = np.min(test[i])
+        test[i] = (test[i]-min_val)/max_val
 
     return train, test
