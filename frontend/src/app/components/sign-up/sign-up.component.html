@@ -1,0 +1,16 @@
+
+<div class="sign-up-body">
+    <div class="sign-up-form">
+        <label>Name</label>
+        <input type="text" name="name" [(ngModel)]="name">
+        <label>Surname</label>
+        <input type="text" name="surname" [(ngModel)]="surname">
+        <label>Collegiate Number</label>
+        <input type="text" name="collegiateNumber" [(ngModel)]="collegiateNumber">
+        <label>Email</label>
+        <input type="email" name="email" [(ngModel)]="email">
+        <label>Password</label>
+        <input type="password" name="password" [(ngModel)]="password">
+    </div>
+    <button type="button" class="submit-button" (click)="register()" >Register</button>
+</div>
