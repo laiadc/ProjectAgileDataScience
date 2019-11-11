@@ -18,6 +18,7 @@ import { FootbarComponent } from './components/footbar/footbar.component';
 import { ListPatientComponent } from './components/list-patient/list-patient.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { TestComponent } from './components/test/test.component';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { TestComponent } from './components/test/test.component';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

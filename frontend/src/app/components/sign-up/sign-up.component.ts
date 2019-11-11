@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { User } from '../../Models/user';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot,} from '@angular/router';
 
 @Component({
@@ -16,7 +18,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    private afs: AngularFirestore
   ) { }
 
   ngOnInit() {
@@ -25,9 +28,17 @@ export class SignUpComponent implements OnInit {
   async register(){
     // TODO ADd DB info user
     try{
+      const usersCollections = this.afs.collection<User>('users');
       const user = await this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password);
       user.user.updateProfile({
         displayName: this.name
+      });
+      usersCollections.doc(user.user.uid).set({
+        uid: user.user.uid,
+        name: this.name,
+        surname: this.surname,
+        collegiateNumber: this.collegiateNumber,
+        email: this.email
       });
 
       this.router.navigate([''])
