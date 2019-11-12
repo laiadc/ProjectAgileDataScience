@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent},
   { path: 'sign-in', component: SigninComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: 'patients', component: ListPatientComponent },
-  { path: 'patient', component: PatientComponent },
-  { path: 'test', component: TestComponent },
+  { path: 'patients', component: ListPatientComponent,  canActivate: [AuthService] },
+  { path: 'patient', component: PatientComponent,  canActivate: [AuthService] },
+  { path: 'test', component: TestComponent,  canActivate: [AuthService] },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
