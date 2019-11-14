@@ -32,7 +32,8 @@ def target_encoding(train, test):
 
     #Find the columns where we want to perform the target encoding
     target_columns = list(set(train.columns) - set(train._get_numeric_data().columns))
-    categorical_columns.remove(['T0_date','ID','patient_gender'])
+    target_columns.remove('T0_date')
+    target_columns.remove('ID')
 
     #perform the target_encoding
     for column in target_columns:

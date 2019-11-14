@@ -194,7 +194,7 @@ def missingData(data):
     b1 = ['cutaneous_biopsy_satellitosis_Unknown','cutaneous_biopsy_satellitosis_absent',
           'cutaneous_biopsy_satellitosis_present']
     aux2 = aux[b1]
-    aux2.columns = ["U","A","P"] 
+    aux2.columns = ["Unknown","absent","present"] 
     data.cutaneous_biopsy_satellitosis = aux2.apply(lambda x: np.argmax(x), axis=1)
 
     b2 = ['cutaneous_biopsy_vascular_invasion_Unknown',
@@ -202,21 +202,21 @@ def missingData(data):
            'cutaneous_biopsy_vascular_invasion_present']
 
     aux2 = aux[b2]
-    aux2.columns = ["U","A","P"] 
+    aux2.columns = ["Unknown","absent","present"] 
     data.cutaneous_biopsy_vascular_invasion = aux2.apply(lambda x: np.argmax(x), axis=1)
 
     b3 = ['cutaneous_biopsy_neurotropism_Unknown',
            'cutaneous_biopsy_neurotropism_absent',
            'cutaneous_biopsy_neurotropism_present']
     aux2 = aux[b3]
-    aux2.columns = ["U","A","P"] 
+    aux2.columns = ["Unknown","absent","present"] 
     data.cutaneous_biopsy_neurotropism = aux2.apply(lambda x: np.argmax(x), axis=1)
 
     b4 = ['cutaneous_biopsy_lymphatic_invasion_Unknown',
            'cutaneous_biopsy_lymphatic_invasion_absent',
            'cutaneous_biopsy_lymphatic_invasion_present']
     aux2 = aux[b4]
-    aux2.columns = ["U","A","P"] 
+    aux2.columns = ["Unknown","absent","present"] 
     data.cutaneous_biopsy_lymphatic_invasion = aux2.apply(lambda x: np.argmax(x), axis=1)
 
     b5 = ['cutaneous_biopsy_regression_absent',
@@ -224,14 +224,14 @@ def missingData(data):
            'cutaneous_biopsy_regression_partial']
 
     aux2 = aux[b5]
-    aux2.columns = ["Absent","Extensive","Partial"] 
+    aux2.columns = ["Unknown","absent","present"] 
     data.cutaneous_biopsy_regression = aux2.apply(lambda x: np.argmax(x), axis=1)
 
     b6 = ['cutaneous_biopsy_associated_nevus_Unknown',
            'cutaneous_biopsy_associated_nevus_absent',
            'cutaneous_biopsy_associated_nevus_present']
     aux2 = aux[b6]
-    aux2.columns = ["U","A","P"] 
+    aux2.columns = ["Unknown","absent","present"] 
     data.cutaneous_biopsy_associated_nevus = aux2.apply(lambda x: np.argmax(x), axis=1)
 
 
@@ -239,14 +239,14 @@ def missingData(data):
            'cutaneous_biopsy_ulceration_present']
 
     aux2 = aux[b7]
-    aux2.columns = ["A","P"] 
+    aux2.columns = ["absent","present"] 
     data.cutaneous_biopsy_ulceration = aux2.apply(lambda x: np.argmax(x), axis=1)
 
     b8 = ['cutaneous_biopsy_satellitosis_Unknown',
            'cutaneous_biopsy_satellitosis_absent',
            'cutaneous_biopsy_satellitosis_present']
     aux2 = aux[b8]
-    aux2.columns = ["U", "A","P"] 
+    aux2.columns = ["Unknown","absent","present"] 
     data.cutaneous_biopsy_satellitosis = aux2.apply(lambda x: np.argmax(x), axis=1)
 
 
