@@ -12,5 +12,11 @@
         <label>Password</label>
         <input type="password" name="password" [(ngModel)]="password">
     </div>
-    <button type="button" class="submit-button" (click)="register()" >Register</button>
+    <div class="submit-bar">
+        <div class="link" [routerLink]="['/sign-in']">
+            Sign in
+        </div>
+        <button type="button" (click)="register()" >Register</button>
+    </div>
+    
 </div>

@@ -86,5 +86,10 @@ export class SignUpComponent implements OnInit {
     
   }
 
-
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+  }
 }
+

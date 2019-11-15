@@ -1,0 +1,35 @@
+@import "../../styles/_global";
+.sign-in-body {
+    margin-top: 100px;
+    margin-left: 20%;
+    padding: 30px;
+    
+}
+
+.sign-in-form {
+    background: $color-primary-1;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-bottom: 20px;
+    
+    input{
+        width: 400px;
+        height: 20px;
+        margin-bottom: 15px;
+        border-radius: 5px 5px;
+    }
+    label {
+        margin-bottom: 5px;
+    }
+}
+
+.submit-bar {
+    width: 300px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    .link{
+        text-decoration: underline;
+    }
+}

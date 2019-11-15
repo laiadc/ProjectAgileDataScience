@@ -5,9 +5,6 @@
     padding: 30px;
     
 }
-.submit-button {
-    margin-left: 300px;
-}
 
 .sign-up-form {
     background: $color-primary-1;
@@ -23,5 +20,16 @@
     }
     label {
         margin-bottom: 5px;
+    }
+}
+
+.submit-bar {
+    width: 300px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    .link{
+        text-decoration: underline;
     }
 }

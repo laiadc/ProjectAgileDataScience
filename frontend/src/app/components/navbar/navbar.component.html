@@ -9,7 +9,7 @@
         </div>
 
         <div class="right-bar">
-                <div class="item-bar" [routerLink]="['sign-up']" *ngIf="!user">
+                <div class="item-bar" [routerLink]="['sign-in']" *ngIf="!user">
                         Enter
                 </div>
                 <div class="item-bar" *ngIf="!!user" (click)="logOut()">
