@@ -1,0 +1,20 @@
+<div class="navbar-box">
+    <div class="nav-bar">
+        <div class="left-bar">
+
+        <a [routerLink]="['']" routerLinkActive="active" class="item-bar" >Home</a>
+        <a [routerLink]="['patients']" routerLinkActive="active" class="item-bar" *ngIf="!!user" >Patients</a>
+
+        
+        </div>
+
+        <div class="right-bar">
+                <div class="item-bar" [routerLink]="['sign-up']" *ngIf="!user">
+                        Enter
+                </div>
+                <div class="item-bar" *ngIf="!!user" (click)="logOut()">
+                        Hi, {{user.displayName}}
+                </div>
+        </div>
+    </div>
+</div>

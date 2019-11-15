@@ -1,0 +1,29 @@
+@import "../../styles/_global";
+
+.container{
+    display:flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.list-patients-container {
+    display:flex;
+    flex-flow: column nowrap;
+    align-content: center;
+    align-items: center;
+    width: 70%;
+
+}
+
+.patient-element {
+    border: 1px solid black;
+    min-height: 30px;
+    width: 100%;
+    padding: 15px;
+    display:flex;
+    align-content: left;
+    align-items: center;
+    background-color: $color-primary-3;
+    font-weight: bold;
+    cursor: pointer;
+}
