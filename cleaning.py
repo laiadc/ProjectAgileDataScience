@@ -1,6 +1,7 @@
-#This file performs:
-# (i) missing data imputation + encoding (binary and target)
-# (ii) Cleans T0_date column and removes ID column
+#This file:
+# (i) Splits the dataset into train and test sets
+# (ii) Performs missing data imputation + encoding (binary and target) + normalization on train and test sets
+# (iii) Cleans T0_date column and removes ID column
 
 import pandas as pd
 import numpy as np
@@ -381,5 +382,3 @@ def cleaning(file_name, perc_test):
 
     return X_train, X_test, y_train, y_test
 
-    #if mode == 'csv':
-        #dataset.to_csv(r'data/'+'clean_'+file_name)
