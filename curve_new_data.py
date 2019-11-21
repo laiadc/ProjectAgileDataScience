@@ -41,3 +41,16 @@ def get_predicted_curves(test, path_to_model):
   curve_x = np.arange(1,len(curve_y)+1,1)
 
   return curve_x, curve_y
+
+
+'''Example of use
+
+test = pd.read_csv('data/test.csv')
+test = test.iloc[0]
+path_to_model = '/content/ProjectAgileDataScience/RF_model.zip'
+
+curve_x, curve_y = get_predicted_curves(test, path_to_model)
+
+plt.plot(curve_x,curve_y)
+
+'''
