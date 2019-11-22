@@ -18,6 +18,9 @@ from pysurvival.utils import load_model
 
 
 def get_predicted_curves(test, path_to_model):
+        ''' Function that takes as an input a pandas series with data of a new patient and
+ returns the survival curve ''' 
+ 
   #Fill missing columns (corresponding to missing values)
   missCols = pd.DataFrame([[0,0,0,0,0]],columns = ['missLymp', 'missLAB', 'missBIO',
         'missBIO2', 'missNEU'])
