@@ -2,18 +2,30 @@
     <div class="title">
         Patient profile
     </div>
-    <div class="patient-info">
+    <div class="patient-info" *ngIf="patient">
         <div class="patient-attribute">
-            <label>Name:</label>Name
+            <label>Name:</label>{{patient.name}}
         </div>
         <div class="patient-attribute">
-            <label>Surname:</label>Surname
+            <label>Surname:</label>{{patient.surname}}
         </div>
         <div class="patient-attribute">
-            <label>Gender:</label>gender
+            <label>Gender:</label>{{patient.name}}
         </div>
         <div class="patient-attribute">
-            <label>Age:</label>Age
+            <label>Age:</label>{{age}}
+        </div>
+        <div class="patient-attribute">
+            <label>Eye color:</label>{{eyeColors[patient.eyeColor]}}
+        </div>
+        <div class="patient-attribute">
+            <label>Hair color:</label>{{hairColors[patient.hairColor]}}
+        </div>
+        <div class="patient-attribute">
+            <label>Patient phototype:</label>{{patientPhototypes[patient.patientPhototype]}}
+        </div>
+        <div class="patient-attribute">
+            <label>Daiagnose date:</label>{{daiagnoseDate}}
         </div>
     </div>
 

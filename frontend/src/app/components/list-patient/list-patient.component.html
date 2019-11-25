@@ -1,7 +1,13 @@
 <div class="container">
-    <div class="list-patients-container">
-        <div class="patient-element" [routerLink]="['/patient'] "*ngFor="let patient of patients">
-            {{patient}}
+        <div class="new-patient-container" >
+            <div class="button" [routerLink]="['/new-patient']">
+                    New Patient
+            </div>
+        </div>
+
+    <div *ngIf="patients" class="list-patients-container">
+        <div  class="patient-element" [routerLink]="['/patient', patient.id] "*ngFor="let patient of patients">
+            {{patient.name}} {{patient.surname}}
         </div>
 
     </div>

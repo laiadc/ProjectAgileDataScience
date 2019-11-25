@@ -5,12 +5,13 @@ service cloud.firestore {
       allow create, read, update: if request.auth.uid == userId;
     }
 
-    match /patients/{userId}/{patientId} {
-      allow create, read, update: if request.auth.uid == userId;
+    match /patients/{patientId} {
+      allow create: if request.auth.uid != null;
+      allow read, update: if request.auth.uid == resource.data.ownerId;
     }
 
-    match /tests/{patientId}/{testId} {
-      allow create, read, update: if exists(/databases/$(database)/documents/patients/$(request.auth.uid)/${patientId});
+    match /tests/{testId} {
+      allow create, read, update: if exists(/databases/$(database)/documents/patients/$(request.auth.uid)/$(patientId));
     }
   }
 }
