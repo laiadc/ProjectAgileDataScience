@@ -3,9 +3,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from '../../Models/user';
 
+import {doctors} from './doctors';
+
 import {Router, RouterStateSnapshot,} from '@angular/router';
 
 import {Subscription} from 'rxjs';
+
+import * as levenshtein from 'fast-levenshtein';
 
 @Component({
   selector: 'app-sign-up',
@@ -42,6 +46,21 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
   }
 
+  checkDoctor(): boolean {
+    const completeName = doctors[this.collegiateNumber];
+    if (!completeName) {
+      alert('Collegiate Number not found');
+      return true;
+    }
+    const constructCompletName = this.name.trim() + " " + this.surname.trim();
+    const distance = levenshtein.get(completeName, constructCompletName.toUpperCase());
+    if (distance > 3) {
+      alert('Collegiate Number and name not maching');
+      return true;
+    }
+    return false;
+  }
+
   async register(){
     
     if (this.name.length < 1) {
@@ -53,9 +72,11 @@ export class SignUpComponent implements OnInit {
       alert('The surname is not valid.');
       return;
     }
-
-    if (this.collegiateNumber.length < 1) {
-      alert('The collegiateNumber is not valid.');
+    if (this.collegiateNumber.length < 1 || this.collegiateNumber.length > 8) {
+      alert('The Collegiate Number is not valid.');
+      return;
+    }
+    if (this.checkDoctor()) {
       return;
     }
 
