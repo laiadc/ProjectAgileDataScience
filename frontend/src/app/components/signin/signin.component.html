@@ -1,1 +1,14 @@
-<p>signin works!</p>
+<div class="sign-in-body">
+    <div class="sign-in-form">
+        <label>Email</label>
+        <input type="email" name="email" [(ngModel)]="email">
+        <label>Password</label>
+        <input type="password" name="password" [(ngModel)]="password">
+    </div>
+    <div class="submit-bar">
+        <div class="link" [routerLink]="['/sign-up']">
+            Sign up
+        </div>
+        <button type="button" (click)="register()" >Log in</button>
+    </div>
+</div>

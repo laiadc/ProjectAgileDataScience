@@ -19,6 +19,7 @@ import { ListPatientComponent } from './components/list-patient/list-patient.com
 import { PatientComponent } from './components/patient/patient.component';
 import { TestComponent } from './components/test/test.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { NewPatientComponent } from './components/new-patient/new-patient.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     FootbarComponent,
     ListPatientComponent,
     PatientComponent,
-    TestComponent
+    TestComponent,
+    NewPatientComponent
   ],
   imports: [
     CommonModule,

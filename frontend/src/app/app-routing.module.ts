@@ -9,6 +9,7 @@ import { SigninComponent} from './components/signin/signin.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ListPatientComponent } from './components/list-patient/list-patient.component';
 import { PatientComponent } from './components/patient/patient.component';
+import { NewPatientComponent } from './components/new-patient/new-patient.component';
 import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'sign-in', component: SigninComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'patients', component: ListPatientComponent,  canActivate: [AuthService] },
-  { path: 'patient', component: PatientComponent,  canActivate: [AuthService] },
+  { path: 'new-patient', component: NewPatientComponent,  canActivate: [AuthService] },
+  { path: 'patient/:patientId', component: PatientComponent,  canActivate: [AuthService] },
   { path: 'test', component: TestComponent,  canActivate: [AuthService] },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

@@ -1,0 +1,32 @@
+<div class="new-patient-body">
+    <div class="new-patient-form">
+        <label>Name</label>
+        <input type="text" name="name" [(ngModel)]="name">
+        <label>Surname</label>
+        <input type="text" name="surname" [(ngModel)]="surname">
+        <label>Gender</label>
+        <select [(ngModel)]="gender">
+            <option *ngFor="let g of genders" value="{{g.value}}">{{g.name}}</option>
+        </select>
+        <label>Birth date</label>
+        <input type="date" [(ngModel)]="birthDate">
+        <label>Eye color</label>
+        <select [(ngModel)]="eyeColor">
+                <option *ngFor="let ec of eyeColors" [ngValue]="ec.value">{{ec.name}}</option>
+        </select>
+        <label>Hair color</label>
+        <select [(ngModel)]="hairColor">
+                <option *ngFor="let hc of hairColors" [ngValue]="hc.value">{{hc.name}}</option>
+        </select>
+        <label>Patient phototype</label>
+        <select [(ngModel)]="patientPhototype">
+                <option *ngFor="let pp of patientPhototypes" [ngValue]="pp.value">{{pp.name}}</option>
+        </select>
+        <label>Daiagnose date</label>
+        <input type="date" [(ngModel)]="daiagnoseDate">
+
+    </div>
+    <div class="submit-bar">
+        <button type="button" (click)="create()" >Create patient</button>
+    </div>
+</div>

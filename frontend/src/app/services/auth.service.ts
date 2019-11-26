@@ -36,7 +36,7 @@ export class AuthService implements CanActivate, OnDestroy {
     if (!!this.user /*&& (this.user.emailVerified)*/) {
       return true;
     }
-    this.router.navigate(['sign-up'], { queryParams: { returnUrl: state.url }});
+    this.router.navigate(['sign-in'], { queryParams: { returnUrl: state.url }});
   }
 
   ngOnDestroy() {
