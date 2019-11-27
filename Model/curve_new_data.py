@@ -39,7 +39,7 @@ def get_predicted_curves(test_df, path_to_model):
   estimator_loaded = load_model(path_to_model)
 
   #load features used by the model
-  features = pd.read_csv("Features_RF_model.csv").iloc[:,1]
+  features = pd.read_csv("trained_models/Features_RF_model.csv").iloc[:,1]
 
   for i in range(n_tests):
     test = test_df.iloc[i]
