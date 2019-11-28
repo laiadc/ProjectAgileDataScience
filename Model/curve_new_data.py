@@ -30,6 +30,13 @@ def get_predicted_curves(test_df, path_to_model):
    - curve_y: the y values for the survivorship curve. This indicates probability to survive.
   """
 
+  if type(test_df) is not pd.core.frame.DataFrame:
+    print('test_df is not a Pandas DataFrame')
+    if type(test_df) is pd.core.series.Series:
+      print('It is a series, though. Converting to DataFrame')
+      test_df = pd.DataFrame(test_df).T
+
+
   n_tests = test_df.shape[0]
 
   x = []
