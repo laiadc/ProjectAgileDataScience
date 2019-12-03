@@ -21,6 +21,7 @@ def csv_encodings(file_name):
 
     #determine the categorical and numerical columns
     numerical_columns = list(dataset._get_numeric_data().columns)
+    numerical_columns.append('cutaneous_biopsy_mitotic_index')
     categorical_columns = list(set(dataset.columns) - set(numerical_columns))
     categorical_columns_binary = ['patient_gender','cutaneous_biopsy_associated_nevus','cutaneous_biopsy_lymphatic_invasion','cutaneous_biopsy_vascular_invasion','cutaneous_biopsy_ulceration','cutaneous_biopsy_neurotropism','cutaneous_biopsy_satellitosis']
     categorical_columns_target = [col for col in categorical_columns if col not in categorical_columns_binary]
@@ -44,11 +45,15 @@ def csv_encodings(file_name):
         for i in range(len(group['months_survival'])):
             data = [[column, group['months_survival'].index[i], (group['months_survival'][i]-min_val)/max_val]]
             df_aux = pd.DataFrame(data, columns = ['Feature','Values','Enc_info'])
-            df = pd.concat([df, df_aux], ignore_index=True)    
+            df = pd.concat([df, df_aux], ignore_index=True)
 
     #create the dataframe containing the encoding information regarding the numerical features
     for column in numerical_columns:
-        data = [[column, 'max', max(dataset[column])],[column, 'min', min(dataset[column])]]
+        if column != 'cutaneous_biopsy_mitotic_index':
+            data = [[column, 'max', max(dataset[column])],[column, 'min', min(dataset[column])]]
+        else:
+            dataset_aux = dataset[dataset.cutaneous_biopsy_mitotic_index != 'Unknown']['cutaneous_biopsy_mitotic_index']
+            data = [[column, 'max', max(dataset_aux)],[column, 'min', min(dataset_aux)]]
         df_aux = pd.DataFrame(data, columns = ['Feature', 'Values', 'Enc_info'])
         df = pd.concat([df, df_aux], ignore_index=True)
 
