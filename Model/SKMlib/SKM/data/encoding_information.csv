@@ -23,6 +23,7 @@ cutaneous_biopsy_regression,Unknown,0.05972400260536734
 cutaneous_biopsy_regression,absent,0.21291995869909722
 cutaneous_biopsy_regression,present,0.0
 cutaneous_biopsy_regression,extensive,0.44845282
+cutaneous_biopsy_regression,partial,0.12298396
 primary_tumour_location_coded,acral,0.25748540563396877
 primary_tumour_location_coded,head and neck,0.18975781244823578
 primary_tumour_location_coded,lower limbs,0.45439676994920086
