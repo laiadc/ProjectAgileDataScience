@@ -16,13 +16,11 @@ def identify_risk_group(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_
     patient_phototype, cutaneous_biopsy_satellitosis, MC1R,cutaneous_biopsy_vascular_invasion,
     cutaneous_biopsy_regression,LAB2419,T0_date,LAB2406,LAB1307,patient_gender,LAB2469,LAB2544,
     neutrofils_per_limfocits,cutaneous_biopsy_neurotropism,LAB2467,LAB1309,primary_tumour_location_coded,
-    LAB2476,LAB2679,LAB2404, cutaneous_biopsy_predominant_cell_type, LAB2407,LAB1301,LAB2498, thr_file):
+    LAB2476,LAB2679,LAB2404, cutaneous_biopsy_predominant_cell_type, LAB2407,LAB1301,LAB2498):
     """
     This function returns the group of risk of the given set of patients test_df
     given as a dataframe. The variable thr_file gives the vsc file storing the
     thresholds information.
-    For instance, it can be called:
-    identify_risk_group(pd.read_csv('data/train.csv'), 'thresholds.csv')
     """
 
     ############# Preprocess data according to the model #############
@@ -55,7 +53,7 @@ def identify_risk_group(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_
     ############# Identify risk group #############
 
     #read risk encoding information
-    thr_info = pd.read_csv(thr_file)
+    thr_info = pd.read_csv('data/thresholds.csv')
     thr_12 = thr_info['Threshold1-2'][0]
     thr_23 = thr_info['Threshold2-3'][0]
     norm_info = thr_info['Normalization_max'][0]
