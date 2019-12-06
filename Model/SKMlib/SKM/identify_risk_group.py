@@ -34,7 +34,7 @@ def identify_risk_group(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_
     features = pd.read_csv('trained_models/Features_ExtraST_model.csv').iloc[:,1]
 
     missBIO2=0
-    
+
     test_df = pd.DataFrame([[cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_histological_subtype,   cutaneous_biopsy_breslow,
         total_count_slnb_ldn, visceral_metastasis_location,total_positives_slnb_ldn,patient_hair_color,
         cutaneous_biopsy_lymphatic_invasion,patient_eye_color,cutaneous_biopsy_mitotic_index,age,
@@ -67,13 +67,11 @@ def identify_risk_group(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_
     risk = np.log(risk)/norm_info
 
     #identify the risk group
-    risk_group = np.zeros([len(risk)])
-    for i in range(len(risk)):
-        if risk[i]<thr_12:
-            risk_group[i] = int(1)
-        elif thr_12 < risk[i] < thr_23:
-            risk_group[i] = int(2)
-        else:
-            risk_group[i] = int(3)
+    if risk<thr_12:
+        risk_group = int(1)
+    elif thr_12 < risk < thr_23:
+        risk_group = int(2)
+    else:
+        risk_group = int(3)
 
     return risk_group

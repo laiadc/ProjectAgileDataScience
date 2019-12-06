@@ -27,7 +27,8 @@ def identify_risk_group(test_df, thr_file):
     #load features used by the model
     features = pd.read_csv('trained_models/Features_ExtraST_model.csv').iloc[:,1]
 
-    test_df = missingData(test_df)
+    #Fill missing columns (corresponding to missing values)
+    test_df.fillna(0, inplace=True)
 
     #Target encoding + normalization
     test_df = preprocess_newdata(test_df)
