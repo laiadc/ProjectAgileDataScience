@@ -10,13 +10,13 @@ from cleaning import missingData
 
 
 
-def identify_risk_group(test_df, thr_file):
+def identify_risk_group(test_df):
     """
     This function returns the group of risk of the given set of patients test_df
     given as a dataframe. The variable thr_file gives the vsc file storing the
     thresholds information.
     For instance, it can be called:
-    identify_risk_group(pd.read_csv('data/train.csv'), 'thresholds.csv')
+    identify_risk_group(pd.read_csv('data/train.csv'))
     """
 
     ############# Preprocess data according to the model #############
@@ -27,7 +27,8 @@ def identify_risk_group(test_df, thr_file):
     #load features used by the model
     features = pd.read_csv('trained_models/Features_ExtraST_model.csv').iloc[:,1]
 
-    test_df = missingData(test_df)
+    #Fill missing columns (corresponding to missing values)
+    test_df.fillna(0, inplace=True)
 
     #Target encoding + normalization
     test_df = preprocess_newdata(test_df)
@@ -38,7 +39,7 @@ def identify_risk_group(test_df, thr_file):
     ############# Identify risk group #############
 
     #read risk encoding information
-    thr_info = pd.read_csv(thr_file)
+    thr_info = pd.read_csv('thresholds.csv')
     thr_12 = thr_info['Threshold1-2'][0]
     thr_23 = thr_info['Threshold2-3'][0]
     norm_info = thr_info['Normalization_max'][0]
