@@ -18,7 +18,13 @@ def preprocess_newdata(dataset):
     encoding_information = pd.read_csv('data/encoding_information.csv')
 
     #determine the numerical columns
-    numerical_columns = list(dataset._get_numeric_data().columns)
+    #numerical_columns = list(dataset._get_numeric_data().columns)
+    numerical_columns = ['patient_phototype', 'T0_date', 'cutaneous_biopsy_breslow', 'cutaneous_biopsy_mitotic_index',
+    'count_inv_prec_tumour','count_situ_prec_tumour', 'total_count_slnb_ldn','total_positives_slnb_ldn','MC1R',
+    'age','specific_death','months_survival','LAB1300','LAB1301','LAB1307','LAB1309','LAB1311','LAB1313','LAB1314',
+    'LAB1316','LAB2404','LAB2405','LAB2406','LAB2407','LAB2419','LAB2422','LAB2467','LAB2469','LAB2476','LAB2498',
+    'LAB2544','LAB2679','LAB4176','neutrofils_per_limfocits','limfocits_per_monocits','LABGF_filtrat_glomerular',
+    'missLymp','missLAB', 'missBIO','missBIO2','missNEU']
 
     #replace each value for the preprocessed one
     for column in dataset.columns:

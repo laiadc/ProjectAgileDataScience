@@ -26,10 +26,10 @@ def identify_risk_group(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_
     ############# Preprocess data according to the model #############
 
     #load model
-    estimator_loaded = load_model('trained_models/ExtraST_model.zip')
+    estimator_loaded = load_model('data/ExtraST_model.zip')
 
     #load features used by the model
-    features = pd.read_csv('trained_models/Features_ExtraST_model.csv').iloc[:,1]
+    features = pd.read_csv('data/Features_ExtraST_model.csv').iloc[:,1]
 
     missBIO2=0
 
@@ -44,11 +44,11 @@ def identify_risk_group(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_
     #Fill missing columns (corresponding to missing values)
     test_df.fillna(0, inplace=True)
 
-    #Target encoding + normalization
-    test_df = preprocess_newdata(test_df)
-
     #Select only the features used by the classifier
     test_df = test_df[features.values]
+
+    #Target encoding + normalization
+    test_df = preprocess_newdata(test_df)
 
     ############# Identify risk group #############
 
@@ -73,3 +73,12 @@ def identify_risk_group(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_
         risk_group = int(3)
 
     return risk_group
+
+
+"""
+Example of use
+identify_risk_group('absent', 'scenario1','superficial_spreading', 0.5, float('NaN'),float('NaN'),float('NaN'),
+                    'brown', 'absent','brown',0,35.5,2.0,'absent',0,'absent', float('NaN'),float('NaN'),
+                    '2003-11-07',14,0.8,'female',181,1.4,0.3652,'absent',1,2.19,'lower limbs',99,0.04,20,
+                    float('NaN'),0.3,244,71)
+"""
