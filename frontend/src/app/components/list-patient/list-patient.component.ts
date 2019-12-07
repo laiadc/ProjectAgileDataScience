@@ -11,7 +11,7 @@ import { Patient, PatientJson, GenderType, EyeColorType } from '../../Models/pat
 })
 export class ListPatientComponent implements OnInit {
 
-  patients;
+  patients: PatientJson[];
   constructor(
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore
@@ -22,7 +22,8 @@ export class ListPatientComponent implements OnInit {
     const user = this.afAuth.auth.currentUser;
     this.afs.collection('patients', (ref) => ref.where('ownerId', '==', user.uid))
       .valueChanges().subscribe((res=> {
-        this.patients=res;
+        const inter:any = res;
+        this.patients = inter;
       }));
     
   }
