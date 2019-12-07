@@ -1,1 +1,24 @@
-<p>test works!</p>
+<div class="container">
+    <div class="title">
+        Test profile
+    </div>
+    <div class="patient-info" *ngIf="patient">
+    </div>
+
+    <div class="title">
+        Test
+    </div>
+    <div class="list-tests-container">
+        <div style="display: block;" *ngIf="!processing">
+			<canvas baseChart width="400" height="400"
+		                [datasets]="lineChartData"
+		                [options]="lineChartOptions"
+		                [labels]="lineChartLabels"
+		                [legend]="lineChartLegend"
+		                [chartType]="lineChartType"></canvas>
+		</div>
+		<div *ngIf="processing">
+			<p> Processant </p>
+		</div>
+    </div>
+</div>
