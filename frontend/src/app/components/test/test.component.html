@@ -1,8 +1,143 @@
 <div class="container">
     <div class="title">
-        Test profile
+        Test attributes
     </div>
-    <div class="patient-info" *ngIf="patient">
+    <div class="test-info" *ngIf="test">
+        <div class="test-attribute">
+            <label>Test Date:</label>{{formatDate(test.test_date)}}
+        </div>
+        <div class="test-attribute">
+            <label>Age:</label>{{test.age}}
+        </div>
+        <div class="test-attribute">
+            <label>Eye color:</label>{{test.patient_eye_color}}
+        </div>
+        <div class="test-attribute">
+            <label>Hair color:</label>{{test.patient_hair_color}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Breslow:</label>{{test.cutaneous_biopsy_breslow}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous biopsy ulceration:</label>{{test.cutaneous_biopsy_ulceration}}
+        </div>
+        <div class="test-attribute">
+            <label>Total Positive Slnb Ldn:</label>{{test.total_positives_slnb_ldn}}
+        </div>
+        <div class="test-attribute">
+            <label>Total Count Slnb Ldn:</label>{{test.total_count_slnb_ldn}}
+        </div>
+        <div class="test-attribute">
+            <label>Scenario:</label>{{test.scenario}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Histological subtype:</label>{{test.cutaneous_biopsy_histological_subtype}}
+        </div>
+        <div class="test-attribute">
+            <label>Patient Phototype:</label>{{test.patient_phototype}}
+        </div>
+        <div class="test-attribute">
+            <label>Visceral Metastasis Location:</label>{{test.visceral_metastasis_location}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Mitotic Index:</label>{{test.cutaneous_biopsy_mitotic_index}}
+        </div>
+        <div class="test-attribute">
+            <label>Neutrofils per Limfocits:</label>{{test.neutrofils_per_limfocits}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1309:</label>{{test.LAB1309}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2406:</label>{{test.LAB2406}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2679:</label>{{test.LAB2679}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2544:</label>{{test.LAB2544}}
+        </div>
+        <div class="test-attribute">
+            <label>Limfocits per Monocits:</label>{{test.limfocits_per_monocits}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Satellitosis:</label>{{test.cutaneous_biopsy_satellitosis}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Lymphatic Invasion:</label>{{test.cutaneous_biopsy_lymphatic_invasion}}
+        </div>
+        <div class="test-attribute">
+            <label>MC1R:</label>{{test.MC1R}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2469:</label>{{test.LAB2469}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2476:</label>{{test.LAB2476}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2404:</label>{{test.LAB2404}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2467:</label>{{test.LAB2467}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1314:</label>{{test.LAB1314}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2405:</label>{{test.LAB2405}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1313:</label>{{test.LAB1313}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2419:</label>{{test.LAB2419}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1307:</label>{{test.LAB1307}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2422:</label>{{test.LAB2422}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1301:</label>{{test.LAB1301}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Vascular Invasion:</label>{{test.cutaneous_biopsy_vascular_invasion}}
+        </div>
+        <div class="test-attribute">
+            <label>Primary Tumour Location Coded:</label>{{test.primary_tumour_location_coded}}
+        </div>
+        <div class="test-attribute">
+            <label>missBIO2:</label>{{test.missBIO2}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB4176:</label>{{test.LAB4176}}
+        </div>
+        <div class="test-attribute">
+            <label>T0_date:</label>{{test.T0_date}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Regression:</label>{{test.cutaneous_biopsy_regression}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1311:</label>{{test.LAB1311}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Neurotropism:</label>{{test.cutaneous_biopsy_neurotropism}}
+        </div>
+        <div class="test-attribute">
+            <label>missNEU:</label>{{test.missNEU}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1316:</label>{{test.LAB1316}}
+        </div>
+        <div class="test-attribute">
+            <label>missBIO:</label>{{test.missBIO}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Predominant Cell Type:</label>{{test.cutaneous_biopsy_predominant_cell_type}}
+        </div>
     </div>
 
     <div class="title">
@@ -10,15 +145,11 @@
     </div>
     <div class="list-tests-container">
         <div style="display: block;" *ngIf="!processing">
-			<canvas baseChart width="400" height="400"
-		                [datasets]="lineChartData"
-		                [options]="lineChartOptions"
-		                [labels]="lineChartLabels"
-		                [legend]="lineChartLegend"
-		                [chartType]="lineChartType"></canvas>
-		</div>
-		<div *ngIf="processing">
-			<p> Processant </p>
-		</div>
+            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [options]="lineChartOptions"
+                [labels]="lineChartLabels" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+        </div>
+        <div *ngIf="processing">
+            <p> Processant </p>
+        </div>
     </div>
 </div>

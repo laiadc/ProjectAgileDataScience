@@ -34,6 +34,12 @@ export enum AbsentPresentType {
     absent = "absent"
 }
 
+export enum ParcialExtensiveType {
+    partial = "partial",
+    extensive = "extensive",
+    absent = "absent"
+}
+
 export enum PrimaryTumourLocationCodedType {
     acral = "acral",
     head_and_neck = "head and neck",
@@ -59,8 +65,10 @@ export interface TestJson {
     patientId: string;
     test_date: string;
     isProcessed: boolean;
+    predictedCurvePoints?: number[];
 
     cutaneous_biopsy_breslow: number;
+    patient_gender: string;
     cutaneous_biopsy_ulceration: string;
     total_positives_slnb_ldn: number;
     total_count_slnb_ldn: number;
@@ -77,7 +85,6 @@ export interface TestJson {
     LAB2406: number;
     LAB2679: number;
     LAB2544: number;
-    limfocits_per_monocits: number;
     cutaneous_biopsy_satellitosis: string;
     cutaneous_biopsy_lymphatic_invasion: string;
     MC1R: number;
@@ -85,24 +92,16 @@ export interface TestJson {
     LAB2476: number;
     LAB2404: number;
     LAB2467: number;
-    LAB1314: number;
-    LAB2405: number;
-    LAB1313: number;
     LAB2419: number;
     LAB1307: number;
-    LAB2422: number;
     LAB1301: number;
+    LAB2407: number;
+    LAB2498: number;
     cutaneous_biopsy_vascular_invasion: string;
     primary_tumour_location_coded: string;
-    missBIO2: number;
-    LAB4176: number;
     T0_date: number;
     cutaneous_biopsy_regression: string;
-    LAB1311: number;
     cutaneous_biopsy_neurotropism: string;
-    missNEU: number;
-    LAB1316: number;
-    missBIO: number;
     cutaneous_biopsy_predominant_cell_type: string;
 }
 
@@ -112,8 +111,10 @@ export class Test {
     patientId: string;
     test_date: Date;
     isProcessed: boolean;
+    predictedCurvePoints?: number[];
 
     cutaneous_biopsy_breslow: number = 0;
+    patient_gender: GenderType;
     cutaneous_biopsy_ulceration: AbsentPresentType;
     total_positives_slnb_ldn: number = 0;
     total_count_slnb_ldn: number = 0;
@@ -130,7 +131,6 @@ export class Test {
     LAB2406: number = 0;
     LAB2679: number = 0;
     LAB2544: number = 0;
-    limfocits_per_monocits: number = 0;
     cutaneous_biopsy_satellitosis: AbsentPresentType;
     cutaneous_biopsy_lymphatic_invasion: AbsentPresentType;
     MC1R: number = 0;
@@ -138,29 +138,22 @@ export class Test {
     LAB2476: number = 0;
     LAB2404: number = 0;
     LAB2467: number = 0;
-    LAB1314: number = 0;
-    LAB2405: number = 0;
-    LAB1313: number = 0;
     LAB2419: number = 0;
     LAB1307: number = 0;
-    LAB2422: number = 0;
     LAB1301: number = 0;
+    LAB2407: number = 0;
+    LAB2498: number = 0;
     cutaneous_biopsy_vascular_invasion: AbsentPresentType;
     primary_tumour_location_coded: PrimaryTumourLocationCodedType;
-    missBIO2: number = 0;
-    LAB4176: number = 0;
     T0_date: number = 0;
-    cutaneous_biopsy_regression: AbsentPresentType;
-    LAB1311: number = 0;
+    cutaneous_biopsy_regression: ParcialExtensiveType;
     cutaneous_biopsy_neurotropism: AbsentPresentType;
-    missNEU: number = 0;
-    LAB1316: number = 0;
-    missBIO: number = 0;
     cutaneous_biopsy_predominant_cell_type: CutaneousBiopsyPredominantCellType;
 
     constructor() {
         this.test_date = new Date();
         this.isProcessed = false;
+        this.patient_gender = GenderType.female;
         this.cutaneous_biopsy_ulceration = AbsentPresentType.present;
         this.scenario = ScenarioType.scenario1;
         this.cutaneous_biopsy_histological_subtype = CutaneousBiopsyHistologiclaSubtypeType.acral_lentiginous;
@@ -171,7 +164,7 @@ export class Test {
         this.cutaneous_biopsy_lymphatic_invasion = AbsentPresentType.present;
         this.cutaneous_biopsy_vascular_invasion = AbsentPresentType.present;
         this.primary_tumour_location_coded = PrimaryTumourLocationCodedType.acral;
-        this.cutaneous_biopsy_regression = AbsentPresentType.present;
+        this.cutaneous_biopsy_regression = ParcialExtensiveType.absent;
         this.cutaneous_biopsy_neurotropism = AbsentPresentType.present;
         this.cutaneous_biopsy_predominant_cell_type = CutaneousBiopsyPredominantCellType.epitheloid;
     }
@@ -186,8 +179,10 @@ export class Test {
         test.patientId = json.patientId;
         test.test_date = json.test_date ? new Date(json.test_date) : undefined;
         test.isProcessed = !!json.isProcessed;
+        test.predictedCurvePoints = json.predictedCurvePoints;
 
         test.cutaneous_biopsy_breslow = json.cutaneous_biopsy_breslow;
+        test.patient_gender = json.patient_gender ? GenderType[json.patient_gender] : undefined;
         test.cutaneous_biopsy_ulceration = json.cutaneous_biopsy_ulceration ? AbsentPresentType[json.cutaneous_biopsy_ulceration] : undefined;
         test.total_positives_slnb_ldn = json.total_positives_slnb_ldn;
         test.total_count_slnb_ldn = json.total_count_slnb_ldn;
@@ -204,7 +199,6 @@ export class Test {
         test.LAB2406 = json.LAB2406;
         test.LAB2679 = json.LAB2679;
         test.LAB2544 = json.LAB2544;
-        test.limfocits_per_monocits = json.limfocits_per_monocits;
         test.cutaneous_biopsy_satellitosis = json.cutaneous_biopsy_satellitosis ? AbsentPresentType[json.cutaneous_biopsy_satellitosis] : undefined;
         test.cutaneous_biopsy_lymphatic_invasion = json.cutaneous_biopsy_lymphatic_invasion ?  AbsentPresentType[json.cutaneous_biopsy_lymphatic_invasion] : undefined;
         test.MC1R = json.MC1R;
@@ -212,24 +206,16 @@ export class Test {
         test.LAB2476 =json.LAB2476;
         test.LAB2404 = json.LAB2404;
         test.LAB2467 = json.LAB2467;
-        test.LAB1314 = json.LAB1314;
-        test.LAB2405 = json.LAB2405;
-        test.LAB1313 = json.LAB1313;
         test.LAB2419 = json.LAB2419;
         test.LAB1307 = json.LAB1307;
-        test.LAB2422 = json.LAB2422;
         test.LAB1301 = json.LAB1301;
+        test.LAB2407 = json.LAB2407;
+        test.LAB2498 = json.LAB2498;
         test.cutaneous_biopsy_vascular_invasion = json.cutaneous_biopsy_vascular_invasion ? AbsentPresentType[json.cutaneous_biopsy_vascular_invasion] : undefined;
         test.primary_tumour_location_coded = json.primary_tumour_location_coded ? PrimaryTumourLocationCodedType[json.primary_tumour_location_coded] : undefined;
-        test.missBIO2 = json.missBIO2;
-        test.LAB4176 = json.LAB4176;
         test.T0_date = json.T0_date;
-        test.cutaneous_biopsy_regression = json.cutaneous_biopsy_regression ? AbsentPresentType[json.cutaneous_biopsy_regression] : undefined;
-        test.LAB1311 = json.LAB1311;
+        test.cutaneous_biopsy_regression = json.cutaneous_biopsy_regression ? ParcialExtensiveType[json.cutaneous_biopsy_regression] : undefined;
         test.cutaneous_biopsy_neurotropism = json.cutaneous_biopsy_neurotropism ? AbsentPresentType[json.cutaneous_biopsy_neurotropism] : undefined;
-        test.missNEU = json.missNEU;
-        test.LAB1316 = json.LAB1316;
-        test.missBIO = json.missBIO;
         test.cutaneous_biopsy_predominant_cell_type = json.cutaneous_biopsy_predominant_cell_type ? CutaneousBiopsyPredominantCellType[json.cutaneous_biopsy_predominant_cell_type] : undefined;
 
         return test;
@@ -243,6 +229,7 @@ export class Test {
             isProcessed: !!this.isProcessed,
 
             cutaneous_biopsy_breslow: this.cutaneous_biopsy_breslow,
+            patient_gender: GenderType[this.patient_gender],
             cutaneous_biopsy_ulceration: AbsentPresentType[this.cutaneous_biopsy_ulceration],
             total_positives_slnb_ldn: this.total_positives_slnb_ldn,
             total_count_slnb_ldn: this.total_count_slnb_ldn,
@@ -259,7 +246,6 @@ export class Test {
             LAB2406: this.LAB2406,
             LAB2679: this.LAB2679,
             LAB2544: this.LAB2544,
-            limfocits_per_monocits: this.limfocits_per_monocits,
             cutaneous_biopsy_satellitosis: AbsentPresentType[this.cutaneous_biopsy_satellitosis],
             cutaneous_biopsy_lymphatic_invasion: AbsentPresentType[this.cutaneous_biopsy_lymphatic_invasion],
             MC1R: this.MC1R,
@@ -267,26 +253,22 @@ export class Test {
             LAB2476: this.LAB2476,
             LAB2404: this.LAB2404,
             LAB2467: this.LAB2467,
-            LAB1314: this.LAB1314,
-            LAB2405: this.LAB2405,
-            LAB1313: this.LAB1313,
             LAB2419: this.LAB2419,
             LAB1307: this.LAB1307,
-            LAB2422: this.LAB2422,
             LAB1301: this.LAB1301,
+            LAB2407: this.LAB2407,
+            LAB2498: this.LAB2498,
             cutaneous_biopsy_vascular_invasion: AbsentPresentType[this.cutaneous_biopsy_vascular_invasion],
             primary_tumour_location_coded: PrimaryTumourLocationCodedType[this.primary_tumour_location_coded],
-            missBIO2: this.missBIO2,
-            LAB4176: this.LAB4176,
             T0_date: this.T0_date,
-            cutaneous_biopsy_regression: AbsentPresentType[this.cutaneous_biopsy_regression],
-            LAB1311: this.LAB1311,
+            cutaneous_biopsy_regression: ParcialExtensiveType[this.cutaneous_biopsy_regression],
             cutaneous_biopsy_neurotropism: AbsentPresentType[this.cutaneous_biopsy_neurotropism],
-            missNEU: this.missNEU,
-            LAB1316: this.LAB1316,
-            missBIO: this.missBIO,
             cutaneous_biopsy_predominant_cell_type: CutaneousBiopsyPredominantCellType[this.cutaneous_biopsy_predominant_cell_type]
         };
+
+        if (this.predictedCurvePoints) {
+            json['predictedCurvePoints'] = this.predictedCurvePoints;
+        }
         return json;
     }
 }

@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'new-patient', component: NewPatientComponent,  canActivate: [AuthService] },
   { path: 'patient/:patientId/new-test', component: NewTestComponent,  canActivate: [AuthService] },
   { path: 'patient/:patientId', component: PatientComponent,  canActivate: [AuthService] },
-  { path: 'test', component: TestComponent,  canActivate: [AuthService] },
+  { path: 'test/:testId', component: TestComponent,  canActivate: [AuthService] },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

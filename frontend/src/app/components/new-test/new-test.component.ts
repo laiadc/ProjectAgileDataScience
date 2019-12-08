@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { Test, AbsentPresentType, ScenarioType, CutaneousBiopsyHistologiclaSubtypeType, 
-  VisceralMetastasisLocationType, PrimaryTumourLocationCodedType, CutaneousBiopsyPredominantCellType, TestJson } from 'src/app/Models/test';
+  VisceralMetastasisLocationType, PrimaryTumourLocationCodedType, CutaneousBiopsyPredominantCellType, TestJson, ParcialExtensiveType } from 'src/app/Models/test';
 import { Patient, PatientJson, GenderType, EyeColorType, HairColorType, PatientPhototype } from '../../Models/patients';
 
 import uuid from 'uuid/v4';
@@ -23,6 +23,11 @@ export class NewTestComponent implements OnInit {
   absentPresent: {name: string; value: AbsentPresentType}[] =[
     {name: 'Absent', value: AbsentPresentType.absent},
     {name: 'Present', value: AbsentPresentType.present}
+  ];
+  extensiveParcial: {name: string; value: ParcialExtensiveType}[] =[
+    {name: 'Absent', value: ParcialExtensiveType.absent},
+    {name: 'Partial', value: ParcialExtensiveType.partial},
+    {name: 'Extensive', value: ParcialExtensiveType.extensive}
   ];
 
   scenarios: {name: string; value: ScenarioType}[] =[
@@ -89,6 +94,7 @@ export class NewTestComponent implements OnInit {
         this.test.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
         this.test.patient_eye_color = this.patient.eyeColor;
         this.test.patient_hair_color = this.patient.hairColor;
+        this.test.patient_gender = this.patient.gender;
         this.test.patientId = this.patientId;
       });
     });

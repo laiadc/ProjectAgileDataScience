@@ -36,7 +36,7 @@
         New Test
     </div>
     <div class="list-tests-container">
-        <div class="tests-element" [routerLink]="['/test'] "*ngFor="let test of tests">
+        <div class="tests-element" [routerLink]="['/test', test.id] "*ngFor="let test of tests">
             {{formatDate(test.test_date)}}
         </div>
 

@@ -2,6 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+
+import { TestJson, Test } from 'src/app/Models/test';
+
 
 @Component({
   selector: 'app-test',
@@ -95,12 +101,47 @@ export class TestComponent implements OnInit {
   public lineChartLegend = true;
   public lineChartType = 'line';
 
+  testId: string;
+  test:Test;
+
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
-  constructor() { }
+  constructor(
+    public afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private route: ActivatedRoute,
+    private router: Router
+    ) { 
+    this.route.paramMap.subscribe((params)=> {
+      this.testId = params.get('testId');
+      console.log(this.testId);
+      if(!this.testId) this.router.navigate(['/']);
+      const rest = this.afs.doc<TestJson>('tests/'+this.testId)
+      .valueChanges().subscribe(res => {
+        console.log(res);
+        this.test = Test.fromJson(res);
+        console.log(this.test);
+        this.processing = !this.test.isProcessed;
+
+      });
+    });
+  }
 
   ngOnInit() {
-    setTimeout(()=>{this.processing=false}, 1000);
+    
+  }
+
+  formatDate(date: Date): string {
+    let month = '' + (date.getMonth() + 1);
+    let day = '' + date.getDate();
+    const year = date.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
 }

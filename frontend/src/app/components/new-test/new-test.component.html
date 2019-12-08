@@ -36,8 +36,6 @@
         <input type="number" name="LAB2679" [(ngModel)]="test.LAB2679" >
         <label>LAB2544</label>
         <input type="number" name="LAB2544" [(ngModel)]="test.LAB2544" >
-        <label>Limfocits per Monocits</label>
-        <input type="number" name="limfocits_per_monocits" [(ngModel)]="test.limfocits_per_monocits" >
         <label>Cutaneous Biopsy Satellitosis</label>
         <select [(ngModel)]="test.cutaneous_biopsy_satellitosis">
             <option *ngFor="let ap of absentPresent" value="{{ap.value}}">{{ap.name}}</option>
@@ -56,18 +54,14 @@
         <input type="number" name="LAB2404" [(ngModel)]="test.LAB2404" >
         <label>LAB2467</label>
         <input type="number" name="LAB2467" [(ngModel)]="test.LAB2467" >
-        <label>LAB1314</label>
-        <input type="number" name="LAB1314" [(ngModel)]="test.LAB1314" >
-        <label>LAB2405</label>
-        <input type="number" name="LAB2405" [(ngModel)]="test.LAB2405" >
-        <label>LAB1313</label>
-        <input type="number" name="LAB1313" [(ngModel)]="test.LAB1313" >
+        <label>LAB2407</label>
+        <input type="number" name="LAB2407" [(ngModel)]="test.LAB2407" >
+        <label>LAB2498</label>
+        <input type="number" name="LAB2498" [(ngModel)]="test.LAB2498" >
         <label>LAB2419</label>
         <input type="number" name="LAB2419" [(ngModel)]="test.LAB2419" >
         <label>LAB1307</label>
         <input type="number" name="LAB1307" [(ngModel)]="test.LAB1307" >
-        <label>LAB2422</label>
-        <input type="number" name="LAB2422" [(ngModel)]="test.LAB2422" >
         <label>LAB1301</label>
         <input type="number" name="LAB1301" [(ngModel)]="test.LAB1301" >
         <label>Cutaneous Biopsy Vascular Invasion</label>
@@ -78,28 +72,16 @@
         <select [(ngModel)]="test.primary_tumour_location_coded">
             <option *ngFor="let ptlc of primaryTumourLocationCoded" value="{{ptlc.value}}">{{ptlc.name}}</option>
         </select>
-        <label>missBIO2</label>
-        <input type="number" name="missBIO2" [(ngModel)]="test.missBIO2" >
-        <label>LAB4176</label>
-        <input type="number" name="LAB4176" [(ngModel)]="test.LAB4176" >
         <label>T0_date</label>
         <input type="number" name="T0_date" [(ngModel)]="test.T0_date" >
         <label>Cutaneous Biopsy Regression</label>
         <select [(ngModel)]="test.cutaneous_biopsy_regression">
-            <option *ngFor="let ap of absentPresent" value="{{ap.value}}">{{ap.name}}</option>
+            <option *ngFor="let ap of extensiveParcial" value="{{ap.value}}">{{ap.name}}</option>
         </select>
-        <label>LAB1311</label>
-        <input type="number" name="LAB1311" [(ngModel)]="test.LAB1311" >
         <label>Cutaneous Biopsy Neurotropism</label>
         <select [(ngModel)]="test.cutaneous_biopsy_neurotropism">
             <option *ngFor="let ap of absentPresent" value="{{ap.value}}">{{ap.name}}</option>
         </select>
-        <label>missNEU</label>
-        <input type="number" name="missNEU" [(ngModel)]="test.missNEU" >
-        <label>LAB1316</label>
-        <input type="number" name="LAB1316" [(ngModel)]="test.LAB1316" >
-        <label>missBIO</label>
-        <input type="number" name="missBIO" [(ngModel)]="test.missBIO" >
         <label>Cutaneous Biopsy Predominant Cell Type</label>
         <select [(ngModel)]="test.cutaneous_biopsy_predominant_cell_type">
             <option *ngFor="let cbpct of cutaneousBiopsyPredominantCellType" value="{{cbpct.value}}">{{cbpct.name}}</option>
