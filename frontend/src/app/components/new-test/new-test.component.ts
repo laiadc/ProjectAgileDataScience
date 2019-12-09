@@ -96,6 +96,7 @@ export class NewTestComponent implements OnInit {
         this.test.patient_hair_color = this.patient.hairColor;
         this.test.patient_gender = this.patient.gender;
         this.test.patientId = this.patientId;
+        this.test.patient_phototype = this.patient.patientPhototype;
       });
     });
   }
