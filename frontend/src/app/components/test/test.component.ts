@@ -66,7 +66,10 @@ export class TestComponent implements OnInit {
         this.test = Test.fromJson(res);
         console.log(this.test);
         this.processing = !this.test.isProcessed;
-
+        if(!this.processing){
+          this.lineChartData[0]['data'] = this.test.predictedCurvePoints;
+          this.lineChartLabels = Array.from(Array(this.test.predictedCurvePoints.length).keys()).map((r)=>(r+1)+'')
+        };
       });
     });
   }
