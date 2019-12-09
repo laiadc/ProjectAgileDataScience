@@ -14,7 +14,7 @@ os.chdir(os.getcwd()+'/SKM')
 
 
 app = Flask(__name__)
-
+#app.run(host='0.0.0.0')
 
 @app.route('/test/<testId>')
 def test_process(testId):
@@ -25,10 +25,22 @@ def test_process(testId):
     try:
         doc = test_model.get()
         test_dict = doc.to_dict()
-        del test_dict['test_date']
-        del test_dict['id']
-        del test_dict['isProcessed']
-        del test_dict['patientId']
+        try:
+            del test_dict['test_date']
+        except:
+            pass
+        try: 
+            del test_dict['id']
+        except:
+            pass
+        try:
+            del test_dict['isProcessed']
+        except:
+            pass
+        try:
+            del test_dict['patientId']
+        except:
+            pass
         try: 
             del test_dict['predictedCurvePoints']
         except:
