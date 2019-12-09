@@ -80,6 +80,7 @@ export class NewTestComponent implements OnInit {
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private route: ActivatedRoute,
+    
     private router: Router
   ) { 
     this.test = new Test();
@@ -110,7 +111,8 @@ export class NewTestComponent implements OnInit {
     const usersCollections = this.afs.collection<TestJson>('tests');
     usersCollections.doc(this.test.id)
       .set(this.test.toJson());
-      this.router.navigate(['/patient', this.patientId]);
+      
+      this.router.navigate(['/test', this.test.id]);
     
   }
 
