@@ -121,11 +121,16 @@
     </div>
     <div class="list-tests-container">
         <div style="display: block;" *ngIf="!processing">
-            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [options]="lineChartOptions"
-                [labels]="lineChartLabels" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+            <canvas baseChart width="800" height="500"
+                        [datasets]="lineChartData"
+                        [options]="lineChartOptions"
+                        [colors]='lineChartColors'
+                        [labels]="lineChartLabels"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"></canvas>
         </div>
         <div *ngIf="processing">
-            <p> Processant </p>
+            <p> Processing graphics... </p>
         </div>
     </div>
 </div>
