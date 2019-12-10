@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { TestJson, Test } from 'src/app/Models/test';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -52,6 +53,8 @@ export class TestComponent implements OnInit {
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
+  subscription1: Subscription;
+
   constructor(
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -63,13 +66,9 @@ export class TestComponent implements OnInit {
       this.testId = params.get('testId');
       console.log(this.testId);
       if(!this.testId) this.router.navigate(['/']);
-      const rest = this.afs.doc<TestJson>('tests/'+this.testId)
+      this.subscription1 = this.afs.doc<TestJson>('tests/'+this.testId)
       .valueChanges().subscribe(res => {
-        
-        console.log(res);
         this.test = Test.fromJson(res);
-        console.log(this.test);
-        this.http.get("http://35.205.222.156:5000/test/"+this.test.id).subscribe((data) => {});
         this.processing = !this.test.isProcessed;
         if(!this.processing){
           this.lineChartData[0]['data'] = this.test.predictedCurvePoints;
@@ -82,7 +81,7 @@ export class TestComponent implements OnInit {
   ngOnInit() {
     setTimeout(()=>{
       if(!this.test.isProcessed)
-      this.http.get("http://35.205.222.156:5000/test/"+this.test.id).subscribe((data) => {});
+      this.http.get("http://35.205.222.156:5000/test/"+this.test.id).subscribe((data) => {console.log('done', data);});
     }, 1000);
 
   }
@@ -98,6 +97,12 @@ export class TestComponent implements OnInit {
         day = '0' + day;
 
     return [year, month, day].join('-');
+  }
+
+  ngOnDestroy() {
+    if (this.subscription1) {
+      this.subscription1.unsubscribe();
+    }
   }
 
 }

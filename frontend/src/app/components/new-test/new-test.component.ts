@@ -111,8 +111,10 @@ export class NewTestComponent implements OnInit {
     const usersCollections = this.afs.collection<TestJson>('tests');
     usersCollections.doc(this.test.id)
       .set(this.test.toJson());
+      setTimeout(()=>{
+        this.router.navigate(['/test', this.test.id]);
+      }, 1000);
       
-      this.router.navigate(['/test', this.test.id]);
     
   }
 

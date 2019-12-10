@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 
 import { Patient, PatientJson, GenderType, EyeColorType, HairColorType, PatientPhototype } from '../../Models/patients';
 import { TestJson, Test } from 'src/app/Models/test';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-patient',
@@ -42,6 +43,9 @@ export class PatientComponent implements OnInit {
   age: number
   daiagnoseDate: string;
 
+  subscription1: Subscription;
+  subscription2: Subscription;
+
   constructor(
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -51,14 +55,14 @@ export class PatientComponent implements OnInit {
     this.route.paramMap.subscribe((params)=> {
       this.patientId = params.get('patientId');
       if(!this.patientId) this.router.navigate(['/']);
-      const rest = this.afs.doc<PatientJson>('patients/'+this.patientId)
+      this.subscription1 = this.afs.doc<PatientJson>('patients/'+this.patientId)
       .valueChanges().subscribe(res => {
         this.patient = Patient.fromJson(res);
         const timeDiff = Math.abs(Date.now() - this.patient.birthDate.getTime());
         this.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
 
         this.daiagnoseDate = this.formatDate( this.patient.daiagnoseDate);
-        this.afs.collection('tests', (ref) => ref.where('patientId', '==', this.patientId))
+        this.subscription2 = this.afs.collection('tests', (ref) => ref.where('patientId', '==', this.patientId))
       .valueChanges().subscribe((res=> {
         const inter:any  = res;
         
@@ -69,6 +73,16 @@ export class PatientComponent implements OnInit {
       });
     });
   }
+
+  ngOnDestroy() {
+    if (this.subscription1) {
+      this.subscription1.unsubscribe();
+    }
+    if (this.subscription2) {
+      this.subscription2.unsubscribe();
+    }
+  }
+  
 
   formatDate(date: Date): string {
     let month = '' + (date.getMonth() + 1);

@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { Patient, PatientJson, GenderType, EyeColorType } from '../../Models/patients';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-patient',
@@ -17,15 +18,21 @@ export class ListPatientComponent implements OnInit {
     private afs: AngularFirestore
   ) { }
   
+  subscription1: Subscription;
 
   ngOnInit() {
     const user = this.afAuth.auth.currentUser;
-    this.afs.collection('patients', (ref) => ref.where('ownerId', '==', user.uid))
+    this.subscription1 = this.afs.collection('patients', (ref) => ref.where('ownerId', '==', user.uid))
       .valueChanges().subscribe((res=> {
         const inter:any = res;
         this.patients = inter;
       }));
     
+  }
+  ngOnDestroy() {
+    if (this.subscription1) {
+      this.subscription1.unsubscribe();
+    }
   }
 
 }
