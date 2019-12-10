@@ -80,6 +80,7 @@ export class NewTestComponent implements OnInit {
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private route: ActivatedRoute,
+    
     private router: Router
   ) { 
     this.test = new Test();
@@ -96,6 +97,7 @@ export class NewTestComponent implements OnInit {
         this.test.patient_hair_color = this.patient.hairColor;
         this.test.patient_gender = this.patient.gender;
         this.test.patientId = this.patientId;
+        this.test.patient_phototype = this.patient.patientPhototype;
       });
     });
   }
@@ -109,7 +111,8 @@ export class NewTestComponent implements OnInit {
     const usersCollections = this.afs.collection<TestJson>('tests');
     usersCollections.doc(this.test.id)
       .set(this.test.toJson());
-      this.router.navigate(['/patient', this.patientId]);
+      
+      this.router.navigate(['/test', this.test.id]);
     
   }
 

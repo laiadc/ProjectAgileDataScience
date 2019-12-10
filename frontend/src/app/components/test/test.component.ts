@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { HttpClient } from '@angular/common/http';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 
@@ -54,6 +56,7 @@ export class TestComponent implements OnInit {
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private route: ActivatedRoute,
+    private http: HttpClient,
     private router: Router
     ) { 
     this.route.paramMap.subscribe((params)=> {
@@ -62,9 +65,11 @@ export class TestComponent implements OnInit {
       if(!this.testId) this.router.navigate(['/']);
       const rest = this.afs.doc<TestJson>('tests/'+this.testId)
       .valueChanges().subscribe(res => {
+        
         console.log(res);
         this.test = Test.fromJson(res);
         console.log(this.test);
+        this.http.get("http://35.205.222.156:5000/test/"+this.test.id).subscribe((data) => {});
         this.processing = !this.test.isProcessed;
         if(!this.processing){
           this.lineChartData[0]['data'] = this.test.predictedCurvePoints;
@@ -75,7 +80,11 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
-    //setTimeout(()=>{this.processing=false}, 1000);
+    setTimeout(()=>{
+      if(!this.test.isProcessed)
+      this.http.get("http://35.205.222.156:5000/test/"+this.test.id).subscribe((data) => {});
+    }, 1000);
+
   }
 
   formatDate(date: Date): string {

@@ -18,8 +18,6 @@
         <select [(ngModel)]="test.cutaneous_biopsy_histological_subtype">
             <option *ngFor="let cbh of cutaneousBiopsyHistologicals" value="{{cbh.value}}">{{cbh.name}}</option>
         </select>
-        <label>Patient Phototype</label>
-        <input type="number" name="patient_phototype" [(ngModel)]="test.patient_phototype" >
         <label>Visceral Metastasis Location</label>
         <select [(ngModel)]="test.visceral_metastasis_location">
             <option *ngFor="let vml of visceralMetastasisLocation" value="{{vml.value}}">{{vml.name}}</option>

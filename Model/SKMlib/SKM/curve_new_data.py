@@ -12,7 +12,7 @@ import numpy as np
 import warnings
 warnings.simplefilter('ignore')
 
-from preprocess_newdata import preprocess_newdata
+from .preprocess_newdata import preprocess_newdata
 from pysurvival.utils import load_model
 
 

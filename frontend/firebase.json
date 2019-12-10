@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "skin-cancer",
+    "public": "dist/skin-cancer-detection",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
