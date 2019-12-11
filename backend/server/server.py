@@ -1,4 +1,5 @@
 from flask import Flask, json
+from flask_cors import CORS
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -15,6 +16,7 @@ os.chdir(os.getcwd()+'/SKM')
 
 app = Flask(__name__)
 #app.run(host='0.0.0.0')
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/test/<testId>')
 def test_process(testId):
@@ -62,3 +64,4 @@ def test_process(testId):
         mimetype='application/json'
     )
     return response
+app.run(ssl_context='adhoc')
