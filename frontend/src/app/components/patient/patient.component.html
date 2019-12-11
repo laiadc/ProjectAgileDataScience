@@ -32,9 +32,13 @@
     <div class="title">
         Tests
     </div>
-    <div class="button" [routerLink]="['/patient', patientId, 'new-test']">
-        New Test
+    <div class="new-test-container">
+            <div class="button" [routerLink]="['/patient', patientId, 'new-test']">
+                New Test
+            </div>
+
     </div>
+    
     <div class="list-tests-container">
         <div class="tests-element" [routerLink]="['/test', test.id] "*ngFor="let test of tests">
             {{formatDate(test.test_date)}}
