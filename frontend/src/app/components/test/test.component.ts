@@ -81,7 +81,7 @@ export class TestComponent implements OnInit {
   ngOnInit() {
     setTimeout(()=>{
       if(!this.test.isProcessed)
-      this.http.get("http://35.205.222.156:5000/test/"+this.test.id).subscribe((data) => {console.log('done', data);});
+      this.http.get("https://35.205.222.156:5000/test/"+this.test.id).subscribe((data) => {console.log('done', data);});
     }, 1000);
 
   }
