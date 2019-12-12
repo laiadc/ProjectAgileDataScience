@@ -1,6 +1,7 @@
 import pandas as pd
 from cleaning import missingData
 
+
 def preprocess_newdata(dataset):
     '''
     This function takes a dataset in the form of a pandas DataFrame and returns
@@ -31,6 +32,7 @@ def preprocess_newdata(dataset):
         if column in numerical_columns:
             max_val = encoding_information[encoding_information['Feature'] == column]['Enc_info'].iloc[0]
             min_val = encoding_information[encoding_information['Feature'] == column]['Enc_info'].iloc[1]
+            dataset[column] = dataset[column].astype(float)
             if max_val != 0:
                 dataset[column] = (dataset[column]-min_val)/max_val
         else:

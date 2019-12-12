@@ -82,3 +82,29 @@ identify_risk_group('absent', 'scenario1','superficial_spreading', 0.5, float('N
                     '2003-11-07',14,0.8,'female',181,1.4,0.3652,'absent',1,2.19,'lower limbs',99,0.04,20,
                     float('NaN'),0.3,244,71)
 """
+
+def identify_risk_group_df(test_df, estimator_loaded):
+     ############# Identify risk group #############
+
+    #read risk encoding information
+    thr_info = pd.read_csv('data/thresholds.csv')
+    thr_12 = thr_info['Threshold1-2'][0]
+    thr_23 = thr_info['Threshold2-3'][0]
+    norm_info = thr_info['Normalization_max'][0]
+
+    #get the risk for each patient
+    risk = estimator_loaded.predict_risk(test_df)
+
+    #normalize the risk
+    risk = np.log(risk)/norm_info
+
+    #identify the risk group
+    if risk<thr_12:
+        risk_group = int(1)
+    elif thr_12 < risk < thr_23:
+        risk_group = int(2)
+    else:
+        risk_group = int(3)
+
+    return risk_group
+    

@@ -15,7 +15,7 @@ warnings.simplefilter('ignore')
 from preprocess_newdata import preprocess_newdata
 from pysurvival.utils import load_model
 
-
+from identify_risk_group import identify_risk_group_df
 
 def get_predicted_curves(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_histological_subtype, cutaneous_biopsy_breslow,
     total_count_slnb_ldn, visceral_metastasis_location,total_positives_slnb_ldn,patient_hair_color,
@@ -63,16 +63,19 @@ def get_predicted_curves(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy
     test = test[features.values]
 
     #Predict survival curve
-    curve_y = estimator_loaded.predict_survival(test.values).flatten()
+    curve_y = estimator_loaded.predict_survival(test.values).flatten()[0:120]
     curve_x = np.arange(1,len(curve_y)+1,1)
-
-    return curve_x, curve_y
+    
+    risk_group = identify_risk_group_df(test, estimator_loaded)
+    
+    
+    return curve_x, curve_y, risk_group
 
 
 
 '''Example of use
 
-curve_x,curve_y = get_predicted_curves('absent', 'scenario1','superficial_spreading', '0.5',
+curve_x,curve_y, risk_group = get_predicted_curves('absent', 'scenario1','superficial_spreading', 0.5,
                  float('NaN'),float('NaN'),float('NaN'),
                  'brown', 'absent','brown',
                  0,35.5,2.0,'absent',0,'absent', float('NaN'),float('NaN'), '2003-11-07', 
