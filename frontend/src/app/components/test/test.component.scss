@@ -1,0 +1,59 @@
+@import "../../styles/_global";
+
+.container{
+    display:flex;
+    flex-flow: column nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.test-info {
+    margin-top: 20px;   
+    display:flex;
+    flex-flow: row wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: left;
+    width: 70%;
+}
+
+.test-attribute {
+    width: 50%;
+    height: 40px;
+    label {
+        font-weight: bold;
+        margin-right: 3px;
+    }
+}
+
+.list-tests-container {
+    margin-top: 20px;
+    display:flex;
+    flex-flow: column nowrap;
+    align-content: center;
+    align-items: center;
+    width: 70%;
+
+}
+
+.tests-element {
+    
+    border: 1px solid black;
+    min-height: 30px;
+    width: 100%;
+    padding: 15px;
+    display:flex;
+    align-content: left;
+    align-items: center;
+    background-color: $color-primary-3;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.title {
+    margin-top: 30px;
+    width: 70%;
+    font-size: 25px;
+    border-bottom: 2px solid black;
+}

@@ -11,7 +11,11 @@ service cloud.firestore {
     }
 
     match /tests/{testId} {
-      allow create, read, update: if exists(/databases/$(database)/documents/patients/$(request.auth.uid)/$(patientId));
+      allow create: if request.auth.uid != null  
+        && exists(/databases/$(database)/documents/patients/$(request.resource.data.patientId))
+        && get(/databases/$(database)/documents/patients/$(request.resource.data.patientId)).data.ownerId == request.auth.uid;
+      allow read, update: if request.auth.uid != null  
+        && get(/databases/$(database)/documents/patients/$(resource.data.patientId)).data.ownerId == request.auth.uid;
     }
   }
 }
