@@ -81,6 +81,7 @@ def missingData(data):
     aux2 = aux[miss>3]
     #Replace missing values with Unknown
     aux2.fillna("Unknown", inplace=True)
+    aux2['cutaneous_biopsy_mitotic_index'].replace('Unknown',0, inplace=True)
     aux[miss>3] = aux2
 
     data[BIO] = aux
