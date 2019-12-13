@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { TestJson, Test } from 'src/app/Models/test';
+import { PatientPhototype } from 'src/app/Models/patients';
 import { Subscription } from 'rxjs';
 
 
@@ -48,6 +49,13 @@ export class TestComponent implements OnInit {
   public lineChartLegend = true;
   public lineChartType = 'line';
 
+  patientPhototypes = {
+    [PatientPhototype.I]:'I',
+    [PatientPhototype.II]:'II',
+    [PatientPhototype.III]:'III',
+    [PatientPhototype.IV]:'IV'
+  };
+
   testId: string;
   test:Test;
 
@@ -81,7 +89,7 @@ export class TestComponent implements OnInit {
   ngOnInit() {
     setTimeout(()=>{
       if(!this.test.isProcessed)
-      this.http.get("https://35.205.222.156:5000/test/"+this.test.id).subscribe((data) => {console.log('done', data);});
+      this.http.get("https://skin-cancer.nicoforteza.com/test/"+this.test.id).subscribe((data) => {console.log('done', data);});
     }, 1000);
 
   }

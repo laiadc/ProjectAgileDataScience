@@ -62,7 +62,7 @@ export class PatientComponent implements OnInit {
         this.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
 
         this.daiagnoseDate = this.formatDate( this.patient.daiagnoseDate);
-        this.subscription2 = this.afs.collection('tests', (ref) => ref.where('patientId', '==', this.patientId))
+        this.subscription2 = this.afs.collection('tests', (ref) => ref.where('patientId', '==', this.patientId).orderBy("test_date"))
       .valueChanges().subscribe((res=> {
         const inter:any  = res;
         
