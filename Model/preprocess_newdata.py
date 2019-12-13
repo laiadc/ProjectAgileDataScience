@@ -12,7 +12,7 @@ def preprocess_newdata(dataset):
     #deal with the T0 and ID columns
     dataset.T0_date = pd.to_datetime(dataset.T0_date).dt.year
     dataset.T0_date = dataset.T0_date.astype(float)
-    dataset.drop(['ID'], axis = 1, inplace=True)
+  #  dataset.drop(['ID'], axis = 1, inplace=True)
     #dataset.head()
 
     #read the encoding information stored in the encoding_information.csv file

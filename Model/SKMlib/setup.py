@@ -23,6 +23,7 @@ setup(
         'missingpy'
     ],
     package_data={'SKM': ['data/encoding_information.csv'],
-                  'SKM': ['data/Features_RF_model.csv'],
-                  'SKM': ['data/RF_model.zip']}
+                  'SKM': ['data/Features_ExtraST_model.csv'],
+                  'SKM': ['data/ExtraST_model.zip'],
+		  'SKM': ['data/thresholds.csv']}
 )

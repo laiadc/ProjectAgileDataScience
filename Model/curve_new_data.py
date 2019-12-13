@@ -9,54 +9,50 @@ File to get the survival curve for a new patient
 
 import pandas as pd
 import numpy as np
-import warnings
-import matplotlib.pyplot as plt
-import matplotlib.colors as colors
-import matplotlib.cm as cmx
-warnings.simplefilter('ignore')
 
 from preprocess_newdata import preprocess_newdata
 from pysurvival.utils import load_model
 
 
-def get_predicted_curves(test_df, path_to_model):
-  """
-  This function returns x and y values to plot the survivorship curve of a test for a patient.
-  @args:
-   - test_df: a pandas.DataFrame containing the columns ['missLymp', 'missLAB', 'missBIO', 'missBIO2', 'missNEU']
-   - path_to_model: string with the path to the model
-  @returns:
-   - curve_x: the x values for the survivorship curve. This indicates time in months.
-   - curve_y: the y values for the survivorship curve. This indicates probability to survive.
-  """
 
-  if type(test_df) is not pd.core.frame.DataFrame:
-    print('test_df is not a Pandas DataFrame')
-    if type(test_df) is pd.core.series.Series:
-      print('It is a series, though. Converting to DataFrame')
-      test_df = pd.DataFrame(test_df).T
+def get_predicted_curves(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_histological_subtype, cutaneous_biopsy_breslow,
+    total_count_slnb_ldn, visceral_metastasis_location,total_positives_slnb_ldn,patient_hair_color,
+    cutaneous_biopsy_lymphatic_invasion,patient_eye_color,cutaneous_biopsy_mitotic_index,age,
+    patient_phototype, cutaneous_biopsy_satellitosis, MC1R,cutaneous_biopsy_vascular_invasion,
+    cutaneous_biopsy_regression,LAB2419,T0_date,LAB2406,LAB1307,patient_gender,LAB2469,LAB2544,
+    neutrofils_per_limfocits,cutaneous_biopsy_neurotropism,LAB2467,LAB1309,primary_tumour_location_coded,
+    LAB2476,LAB2679,LAB2404, cutaneous_biopsy_predominant_cell_type, LAB2407,LAB1301,LAB2498):
+  
+    """
+    This function returns x and y values to plot the survivorship curve of a test for a patient.
+    @args:
+    -cutaneous_biopsy_ulceration...LAB2498: numerical variables from the patient and tests 
+    @returns:
+    - curve_x: the x values for the survivorship curve. This indicates time in months.
+    - curve_y: the y values for the survivorship curve. This indicates probability to survive.
+    """
 
+   
 
-  n_tests = test_df.shape[0]
+    #load model
+    estimator_loaded = load_model('ExtraST_model.zip')
 
-  x = []
-  y = []
+    #load features used by the model
+    features = pd.read_csv("Features_ExtraST_model.csv").iloc[:,1]
+    
+    missBIO2=0
+    
+    test = pd.DataFrame([[cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_histological_subtype,   cutaneous_biopsy_breslow,
+        total_count_slnb_ldn, visceral_metastasis_location,total_positives_slnb_ldn,patient_hair_color,
+        cutaneous_biopsy_lymphatic_invasion,patient_eye_color,cutaneous_biopsy_mitotic_index,age,
+        patient_phototype, cutaneous_biopsy_satellitosis, MC1R,cutaneous_biopsy_vascular_invasion,
+        cutaneous_biopsy_regression,LAB2419,T0_date,missBIO2,LAB2406,LAB1307,patient_gender,LAB2469,LAB2544,
+        neutrofils_per_limfocits,cutaneous_biopsy_neurotropism,LAB2467,LAB1309,primary_tumour_location_coded,
+        LAB2476,LAB2679,LAB2404, cutaneous_biopsy_predominant_cell_type, LAB2407,LAB1301,LAB2498]], columns=features)
 
-  #load model
-  estimator_loaded = load_model(path_to_model)
-
-  #load features used by the model
-  features = pd.read_csv("trained_models/Features_RF_model.csv").iloc[:,1]
-
-  for i in range(n_tests):
-    test = test_df.iloc[i]
+    n_tests = test.shape[0]
     #Fill missing columns (corresponding to missing values)
-    missCols = pd.DataFrame([[0,0,0,0,0]],columns = ['missLymp', 'missLAB', 'missBIO',
-          'missBIO2', 'missNEU'])
-    aux = pd.concat([test,missCols.T], axis=1)
-    test = aux.iloc[:,0].T
     test.fillna(0, inplace=True)
-    test = test.to_frame().T
 
     #Target encoding + normalization
     test = preprocess_newdata(test)
@@ -68,56 +64,19 @@ def get_predicted_curves(test_df, path_to_model):
     curve_y = estimator_loaded.predict_survival(test.values).flatten()
     curve_x = np.arange(1,len(curve_y)+1,1)
 
-    x.append(curve_x)
-    y.append(curve_y)
+    return curve_x, curve_y
 
-  return x, y
 
-def plot_predicted_curve(test_df, path_to_model, filename):
-  """
-  This function plots the survivorship curve of a test for a patient.
-  @args:
-   - test_df: a pandas.DataFrame containing the columns ['missLymp', 'missLAB', 'missBIO', 'missBIO2', 'missNEU'].
-   - path_to_model: string with the path to the model.
-   - filename: The filename for the image. The path will be 'imgs/surv_curve_'+filename+'.png'.
-  @returns:
-   - fig: The figure object in case you want to do any modification.
-  """
-
-  fig = plt.figure(figsize=(20,10))
-  xlim = 0
-  n_tests = test_df.shape[0]
-
-  jet = cm = plt.get_cmap('jet') 
-  cNorm  = colors.Normalize(vmin=0, vmax=n_tests)
-  scalarMap = cmx.ScalarMappable(norm=cNorm, cmap=jet)
-
-  curve_x, curve_y = get_predicted_curves(test_df, path_to_model)
-
-  for test in range(n_tests):
-    x = curve_x[test]
-    y = curve_y[test]
-    plt.plot(x, y, '-', color=scalarMap.to_rgba(test))
-    if xlim < x[-1]+1:
-      xlim = x[-1]+1
-
-  plt.legend(labels=['test_'+str(i) for i in range(n_tests)])
-  plt.xlim((0, xlim))
-  plt.title('Survivorship curve')
-  plt.xlabel('Time (months)')
-  plt.ylabel('Survival probability')
-  plt.ylim((0,1.01))  
-  plt.savefig('imgs/surv_curve_' + filename + '.png', dpi=300, transparent=False)
-  plt.show()
-
-  return fig
 
 '''Example of use
 
-test = pd.read_csv('data/test.csv') # dataset with the test patients
-test = test.iloc[0] # select first patient
-path_to_model = 'RF_model.zip' # path to model
+curve_x,curve_y = get_predicted_curves('absent', 'scenario1','superficial_spreading', '0.5',
+                 float('NaN'),float('NaN'),float('NaN'),
+                 'brown', 'absent','brown',
+                 0,35.5,2.0,'absent',0,'absent', float('NaN'),float('NaN'), '2003-11-07', 
+                 14,0.8,'female',181,1.4,0.3652,
+                 'absent',1,2.19,'lower limbs',99,0.04,20,float('NaN'),0.3,244,71)
 
-fig = plot_predicted_curve(test, path_to_model, 'test_patient_00')
+plt.plot(curve_x,curve_y)
 
 '''
