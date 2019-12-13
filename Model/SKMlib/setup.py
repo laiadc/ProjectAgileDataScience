@@ -9,18 +9,18 @@ Setup file
 from setuptools import setup, find_packages
 
 setup(
-    name='SkinCancerModel',
+    name='SKM',
     version='0.1.0',
     description='Skin cancer Model to predict the survival curve of patients.',
     author='Agile Data Science Team 1',
     url='https://github.com/laiadc/ProjectAgileDataScience',
-    packages=find_packages(include=['SKM', 'SKM.*']),
+    packages=find_packages(),
     install_requires=[
         'pysurvival',
         'pandas',
         'numpy',
         'matplotlib',
-        'warnings',
+        'missingpy'
     ],
     package_data={'SKM': ['data/encoding_information.csv'],
                   'SKM': ['data/Features_RF_model.csv'],
