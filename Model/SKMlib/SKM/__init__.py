@@ -9,6 +9,6 @@ __init.py__
 
 from .curve_new_data import get_predicted_curves
 
-from identify_risk_group import identify_risk_group
+from .identify_risk_group import identify_risk_group
 
 
