@@ -48,11 +48,12 @@ def test_process(testId):
         except:
             pass
         print(test_dict)
-        curve_x, curve_y = get_predicted_curves(**test_dict)
+        curve_x, curve_y, risk = get_predicted_curves(**test_dict)
         print('length', len(curve_y.tolist()), len(curve_x.tolist()) )
         test_model.set({
             'isProcessed': True,
-            'predictedCurvePoints': curve_y.tolist()
+            'predictedCurvePoints': curve_y.tolist(),
+            'risk': risk
         }, merge=True)
         print(curve_y)
     except Exception as e:
@@ -64,4 +65,4 @@ def test_process(testId):
         mimetype='application/json'
     )
     return response
-app.run(ssl_context='adhoc')
+
