@@ -4,6 +4,13 @@
     </div>
     <div class="test-info" *ngIf="test">
         <div class="test-attribute">
+            <label>Risk:</label>
+            <strong *ngIf="processing">Processing...</strong>
+            <strong *ngIf="!processing && test.risk == 1" style="color: green;">Low</strong>
+            <strong *ngIf="!processing && test.risk == 2" style="color: orange;">Medium</strong>
+            <strong *ngIf="!processing && test.risk == 3" style="color: orangered;">High</strong>
+        </div>
+        <div class="test-attribute">
             <label>Test Date:</label>{{formatDate(test.test_date)}}
         </div>
         <div class="test-attribute">
@@ -121,22 +128,18 @@
     </div>
     <div class="list-tests-container">
         <div style="display: block;" *ngIf="!processing">
-            <canvas baseChart width="800" height="500"
-                        [datasets]="lineChartData"
-                        [options]="lineChartOptions"
-                        [colors]='lineChartColors'
-                        [labels]="lineChartLabels"
-                        [legend]="lineChartLegend"
-                        [chartType]="lineChartType"></canvas>
+            <canvas baseChart width="800" height="500" [datasets]="lineChartData" [options]="lineChartOptions"
+                [colors]='lineChartColors' [labels]="lineChartLabels" [legend]="lineChartLegend"
+                [chartType]="lineChartType"></canvas>
         </div>
         <div *ngIf="processing">
             <p> Processing graphics... </p>
         </div>
     </div>
-     <div class="title">
+    <div class="title">
         Most important variables
     </div>
     <div class="list-tests-container">
-        
+
     </div>
 </div>

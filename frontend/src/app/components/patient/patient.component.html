@@ -40,6 +40,7 @@
     </div>
     
     <div class="list-tests-container">
+        <strong *ngIf="!tests || tests.length < 1">No tests yet</strong>
         <div class="tests-element" [routerLink]="['/test', test.id] "*ngFor="let test of tests">
             {{formatDate(test.test_date)}}
         </div>

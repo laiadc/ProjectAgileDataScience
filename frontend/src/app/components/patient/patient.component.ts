@@ -16,7 +16,7 @@ export class PatientComponent implements OnInit {
 
   patientId: string;
   patient: Patient;
-  tests: Test;
+  tests: Test[];
 
   eyeColors  = {
     [EyeColorType.blue]:'Blue',

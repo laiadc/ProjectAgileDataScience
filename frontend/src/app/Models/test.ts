@@ -66,6 +66,7 @@ export interface TestJson {
     test_date: string;
     isProcessed: boolean;
     predictedCurvePoints?: number[];
+    risk?: number;
 
     cutaneous_biopsy_breslow: number;
     patient_gender: string;
@@ -112,6 +113,7 @@ export class Test {
     test_date: Date;
     isProcessed: boolean;
     predictedCurvePoints?: number[];
+    risk?: number;
 
     cutaneous_biopsy_breslow: number = 0;
     patient_gender: GenderType;
@@ -180,6 +182,7 @@ export class Test {
         test.test_date = json.test_date ? new Date(json.test_date) : undefined;
         test.isProcessed = !!json.isProcessed;
         test.predictedCurvePoints = json.predictedCurvePoints;
+        test.risk = json.risk;
 
         test.cutaneous_biopsy_breslow = json.cutaneous_biopsy_breslow;
         test.patient_gender = json.patient_gender ? GenderType[json.patient_gender] : undefined;
@@ -268,6 +271,9 @@ export class Test {
 
         if (this.predictedCurvePoints) {
             json['predictedCurvePoints'] = this.predictedCurvePoints;
+        }
+        if (this.risk) {
+            json['risk'] = this.risk;
         }
         return json;
     }
