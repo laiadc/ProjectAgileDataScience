@@ -4,13 +4,6 @@
     </div>
     <div class="test-info" *ngIf="test">
         <div class="test-attribute">
-            <label>Risk:</label>
-            <strong *ngIf="processing">Processing...</strong>
-            <strong *ngIf="!processing && test.risk == 1" style="color: green;">Low</strong>
-            <strong *ngIf="!processing && test.risk == 2" style="color: orange;">Medium</strong>
-            <strong *ngIf="!processing && test.risk == 3" style="color: orangered;">High</strong>
-        </div>
-        <div class="test-attribute">
             <label>Test Date:</label>{{formatDate(test.test_date)}}
         </div>
         <div class="test-attribute">
@@ -121,6 +114,15 @@
         <div class="test-attribute">
             <label>Cutaneous Biopsy Predominant Cell Type:</label>{{test.cutaneous_biopsy_predominant_cell_type}}
         </div>
+    </div>
+    <div class="title">
+        Risk
+    </div>
+    <div class="list-tests-container">
+        <strong *ngIf="processing">Processing...</strong>
+            <strong *ngIf="!processing && test.risk == 1" style="color: green;">Low</strong>
+            <strong *ngIf="!processing && test.risk == 2" style="color: orange;">Medium</strong>
+            <strong *ngIf="!processing && test.risk == 3" style="color: orangered;">High</strong>
     </div>
 
     <div class="title">
