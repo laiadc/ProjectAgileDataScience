@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { Patient, PatientJson, GenderType, EyeColorType, HairColorType, PatientPhototype } from '../../Models/patients';
+import { TestJson, Test } from 'src/app/Models/test';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-patient',
@@ -14,6 +16,7 @@ export class PatientComponent implements OnInit {
 
   patientId: string;
   patient: Patient;
+  tests: Test[];
 
   eyeColors  = {
     [EyeColorType.blue]:'Blue',
@@ -40,6 +43,9 @@ export class PatientComponent implements OnInit {
   age: number
   daiagnoseDate: string;
 
+  subscription1: Subscription;
+  subscription2: Subscription;
+
   constructor(
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -49,25 +55,46 @@ export class PatientComponent implements OnInit {
     this.route.paramMap.subscribe((params)=> {
       this.patientId = params.get('patientId');
       if(!this.patientId) this.router.navigate(['/']);
-      const res = this.afs.doc<PatientJson>('patients/'+this.patientId)
+      this.subscription1 = this.afs.doc<PatientJson>('patients/'+this.patientId)
       .valueChanges().subscribe(res => {
         this.patient = Patient.fromJson(res);
         const timeDiff = Math.abs(Date.now() - this.patient.birthDate.getTime());
         this.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
-      
-        const d = this.patient.daiagnoseDate;
-        let month = '' + (d.getMonth() + 1);
-        let day = '' + d.getDate();
-        const year = d.getFullYear();
 
-        if (month.length < 2) 
-            month = '0' + month;
-        if (day.length < 2) 
-            day = '0' + day;
+        this.daiagnoseDate = this.formatDate( this.patient.daiagnoseDate);
+        this.subscription2 = this.afs.collection('tests', (ref) => ref.where('patientId', '==', this.patientId).orderBy("test_date"))
+      .valueChanges().subscribe((res=> {
+        const inter:any  = res;
+        
+        this.tests=inter.map((inData: TestJson) => {return Test.fromJson(inData);});
+        console.log("test", this.tests);
+      }));
 
-        this.daiagnoseDate = [year, month, day].join('-');
       });
     });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription1) {
+      this.subscription1.unsubscribe();
+    }
+    if (this.subscription2) {
+      this.subscription2.unsubscribe();
+    }
+  }
+  
+
+  formatDate(date: Date): string {
+    let month = '' + (date.getMonth() + 1);
+    let day = '' + date.getDate();
+    const year = date.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
   ngOnInit() {

@@ -6,6 +6,7 @@
         </div>
 
     <div *ngIf="patients" class="list-patients-container">
+            <strong *ngIf="!patients || patients.length < 1">No patients yet</strong>
         <div  class="patient-element" [routerLink]="['/patient', patient.id] "*ngFor="let patient of patients">
             {{patient.name}} {{patient.surname}}
         </div>

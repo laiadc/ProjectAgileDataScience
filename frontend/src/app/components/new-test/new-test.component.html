@@ -1,0 +1,92 @@
+<div class="new-test-body">
+    <div class="new-test-form">
+        <label>Cutaneous Biopsy Breslow</label>
+        <input type="number" name="cutaneous_biopsy_breslow" [(ngModel)]="test.cutaneous_biopsy_breslow" >
+        <label>Cutaneous Biopsy Ulceration</label>
+        <select [(ngModel)]="test.cutaneous_biopsy_ulceration">
+            <option *ngFor="let ap of absentPresent" value="{{ap.value}}">{{ap.name}}</option>
+        </select>
+        <label>Total Positive Slnb Ldn</label>
+        <input type="number" name="total_positives_slnb_ldn" [(ngModel)]="test.total_positives_slnb_ldn" >
+        <label>Total Count Slnb Ldn</label>
+        <input type="number" name="total_count_slnb_ldn" [(ngModel)]="test.total_count_slnb_ldn" >
+        <label>Scenario</label>
+        <select [(ngModel)]="test.scenario">
+            <option *ngFor="let s of scenarios" value="{{s.value}}">{{s.name}}</option>
+        </select>
+        <label>Cutaneous Biopsy Histological subtype</label>
+        <select [(ngModel)]="test.cutaneous_biopsy_histological_subtype">
+            <option *ngFor="let cbh of cutaneousBiopsyHistologicals" value="{{cbh.value}}">{{cbh.name}}</option>
+        </select>
+        <label>Visceral Metastasis Location</label>
+        <select [(ngModel)]="test.visceral_metastasis_location">
+            <option *ngFor="let vml of visceralMetastasisLocation" value="{{vml.value}}">{{vml.name}}</option>
+        </select>
+        <label>Cutaneous Biopsy Mitotic Index</label>
+        <input type="number" name="cutaneous_biopsy_mitotic_index" [(ngModel)]="test.cutaneous_biopsy_mitotic_index" >
+        <label>Neutrofils per Limfocits</label>
+        <input type="number" name="neutrofils_per_limfocits" [(ngModel)]="test.neutrofils_per_limfocits" >
+        <label>LAB1309</label>
+        <input type="number" name="LAB1309" [(ngModel)]="test.LAB1309" >
+        <label>LAB2406</label>
+        <input type="number" name="LAB2406" [(ngModel)]="test.LAB2406" >
+        <label>LAB2679</label>
+        <input type="number" name="LAB2679" [(ngModel)]="test.LAB2679" >
+        <label>LAB2544</label>
+        <input type="number" name="LAB2544" [(ngModel)]="test.LAB2544" >
+        <label>Cutaneous Biopsy Satellitosis</label>
+        <select [(ngModel)]="test.cutaneous_biopsy_satellitosis">
+            <option *ngFor="let ap of absentPresent" value="{{ap.value}}">{{ap.name}}</option>
+        </select>
+        <label>Cutaneous Biopsy Lymphatic Invasion</label>
+        <select [(ngModel)]="test.cutaneous_biopsy_lymphatic_invasion">
+            <option *ngFor="let ap of absentPresent" value="{{ap.value}}">{{ap.name}}</option>
+        </select>
+        <label>MC1R</label>
+        <input type="number" name="MC1R" [(ngModel)]="test.MC1R" >
+        <label>LAB2469</label>
+        <input type="number" name="LAB2469" [(ngModel)]="test.LAB2469" >
+        <label>LAB2476</label>
+        <input type="number" name="LAB2476" [(ngModel)]="test.LAB2476" >
+        <label>LAB2404</label>
+        <input type="number" name="LAB2404" [(ngModel)]="test.LAB2404" >
+        <label>LAB2467</label>
+        <input type="number" name="LAB2467" [(ngModel)]="test.LAB2467" >
+        <label>LAB2407</label>
+        <input type="number" name="LAB2407" [(ngModel)]="test.LAB2407" >
+        <label>LAB2498</label>
+        <input type="number" name="LAB2498" [(ngModel)]="test.LAB2498" >
+        <label>LAB2419</label>
+        <input type="number" name="LAB2419" [(ngModel)]="test.LAB2419" >
+        <label>LAB1307</label>
+        <input type="number" name="LAB1307" [(ngModel)]="test.LAB1307" >
+        <label>LAB1301</label>
+        <input type="number" name="LAB1301" [(ngModel)]="test.LAB1301" >
+        <label>Cutaneous Biopsy Vascular Invasion</label>
+        <select [(ngModel)]="test.cutaneous_biopsy_vascular_invasion">
+            <option *ngFor="let ap of absentPresent" value="{{ap.value}}">{{ap.name}}</option>
+        </select>
+        <label>Primary Tumour Location Coded</label>
+        <select [(ngModel)]="test.primary_tumour_location_coded">
+            <option *ngFor="let ptlc of primaryTumourLocationCoded" value="{{ptlc.value}}">{{ptlc.name}}</option>
+        </select>
+        <label>T0_date</label>
+        <input type="number" name="T0_date" [(ngModel)]="test.T0_date" >
+        <label>Cutaneous Biopsy Regression</label>
+        <select [(ngModel)]="test.cutaneous_biopsy_regression">
+            <option *ngFor="let ap of extensiveParcial" value="{{ap.value}}">{{ap.name}}</option>
+        </select>
+        <label>Cutaneous Biopsy Neurotropism</label>
+        <select [(ngModel)]="test.cutaneous_biopsy_neurotropism">
+            <option *ngFor="let ap of absentPresent" value="{{ap.value}}">{{ap.name}}</option>
+        </select>
+        <label>Cutaneous Biopsy Predominant Cell Type</label>
+        <select [(ngModel)]="test.cutaneous_biopsy_predominant_cell_type">
+            <option *ngFor="let cbpct of cutaneousBiopsyPredominantCellType" value="{{cbpct.value}}">{{cbpct.name}}</option>
+        </select>
+
+    </div>
+    <div class="submit-bar">
+        <button type="button" (click)="create()" >Create Test</button>
+    </div>
+</div>

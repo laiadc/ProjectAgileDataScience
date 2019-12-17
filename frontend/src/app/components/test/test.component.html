@@ -1,1 +1,141 @@
-<p>test works!</p>
+<div class="container">
+    <div class="title">
+        Test attributes
+    </div>
+    <div class="test-info" *ngIf="test">
+        <div class="test-attribute">
+            <label>Test Date:</label>{{formatDate(test.test_date)}}
+        </div>
+        <div class="test-attribute">
+            <label>Age:</label>{{test.age}}
+        </div>
+        <div class="test-attribute">
+            <label>Gender:</label>{{test.patient_gender}}
+        </div>
+        <div class="test-attribute">
+            <label>Eye color:</label>{{test.patient_eye_color}}
+        </div>
+        <div class="test-attribute">
+            <label>Hair color:</label>{{test.patient_hair_color}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Breslow:</label>{{test.cutaneous_biopsy_breslow}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous biopsy ulceration:</label>{{test.cutaneous_biopsy_ulceration}}
+        </div>
+        <div class="test-attribute">
+            <label>Total Positive Slnb Ldn:</label>{{test.total_positives_slnb_ldn}}
+        </div>
+        <div class="test-attribute">
+            <label>Total Count Slnb Ldn:</label>{{test.total_count_slnb_ldn}}
+        </div>
+        <div class="test-attribute">
+            <label>Scenario:</label>{{test.scenario}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Histological subtype:</label>{{test.cutaneous_biopsy_histological_subtype}}
+        </div>
+        <div class="test-attribute">
+            <label>Patient Phototype:</label>{{patientPhototypes[test.patient_phototype]}}
+        </div>
+        <div class="test-attribute">
+            <label>Visceral Metastasis Location:</label>{{test.visceral_metastasis_location}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Mitotic Index:</label>{{test.cutaneous_biopsy_mitotic_index}}
+        </div>
+        <div class="test-attribute">
+            <label>Neutrofils per Limfocits:</label>{{test.neutrofils_per_limfocits}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1309:</label>{{test.LAB1309}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2406:</label>{{test.LAB2406}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2679:</label>{{test.LAB2679}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2544:</label>{{test.LAB2544}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Satellitosis:</label>{{test.cutaneous_biopsy_satellitosis}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Lymphatic Invasion:</label>{{test.cutaneous_biopsy_lymphatic_invasion}}
+        </div>
+        <div class="test-attribute">
+            <label>MC1R:</label>{{test.MC1R}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2469:</label>{{test.LAB2469}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2476:</label>{{test.LAB2476}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2404:</label>{{test.LAB2404}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2467:</label>{{test.LAB2467}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2407:</label>{{test.LAB2407}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2498:</label>{{test.LAB2498}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB2419:</label>{{test.LAB2419}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1307:</label>{{test.LAB1307}}
+        </div>
+        <div class="test-attribute">
+            <label>LAB1301:</label>{{test.LAB1301}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Vascular Invasion:</label>{{test.cutaneous_biopsy_vascular_invasion}}
+        </div>
+        <div class="test-attribute">
+            <label>Primary Tumour Location Coded:</label>{{test.primary_tumour_location_coded}}
+        </div>
+        <div class="test-attribute">
+            <label>T0_date:</label>{{test.T0_date}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Regression:</label>{{test.cutaneous_biopsy_regression}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Neurotropism:</label>{{test.cutaneous_biopsy_neurotropism}}
+        </div>
+        <div class="test-attribute">
+            <label>Cutaneous Biopsy Predominant Cell Type:</label>{{test.cutaneous_biopsy_predominant_cell_type}}
+        </div>
+    </div>
+    <div class="title">
+        Risk
+    </div>
+    <div class="list-tests-container">
+        <strong *ngIf="processing">Processing...</strong>
+            <strong *ngIf="!processing && test.risk == 1" style="color: rgba(109,200,163,1);">Low</strong>
+            <strong *ngIf="!processing && test.risk == 2" style="color: rgba(145,143,202,1);">Medium</strong>
+            <strong *ngIf="!processing && test.risk == 3" style="color: rgba(242,99,99,1);">High</strong>
+    </div>
+
+    <div class="title">
+        Survivorship curve
+    </div>
+    <div class="list-tests-container">
+        <div style="display: block;" *ngIf="!processing">
+            <canvas baseChart width="800" height="500" [datasets]="lineChartData" [options]="lineChartOptions"
+                [colors]='lineChartColors' [labels]="lineChartLabels" [legend]="lineChartLegend"
+                [chartType]="lineChartType"></canvas>
+        </div>
+        <div *ngIf="processing">
+            <p> Processing graphics... </p>
+        </div>
+    </div>
+</div>

@@ -12,10 +12,10 @@ import numpy as np
 import warnings
 warnings.simplefilter('ignore')
 
-from preprocess_newdata import preprocess_newdata
+from .preprocess_newdata import preprocess_newdata
 from pysurvival.utils import load_model
 
-from identify_risk_group import identify_risk_group_df
+from .identify_risk_group import identify_risk_group_df
 
 def get_predicted_curves(cutaneous_biopsy_ulceration, scenario, cutaneous_biopsy_histological_subtype, cutaneous_biopsy_breslow,
     total_count_slnb_ldn, visceral_metastasis_location,total_positives_slnb_ldn,patient_hair_color,

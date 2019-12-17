@@ -27,7 +27,7 @@ export class NewPatientComponent implements OnInit {
   genders: {name: string; value: GenderType}[] =[
     {name: 'Male', value: GenderType.male},
     {name: 'Female', value: GenderType.female}
-  ]
+  ];
 
   eyeColors: {name: string; value: EyeColorType}[] =[
     {name: 'Blue', value: EyeColorType.blue},
@@ -35,20 +35,20 @@ export class NewPatientComponent implements OnInit {
     {name: 'Brown', value: EyeColorType.brown},
     {name: 'Green', value: EyeColorType.green},
     {name: 'Other', value: EyeColorType.other}
-  ]
+  ];
   hairColors: {name: string; value: HairColorType}[] =[
     {name: 'Black', value: HairColorType.black},
     {name: 'Brown', value: HairColorType.brown},
     {name: 'Blond', value: HairColorType.blond},
     {name: 'Red', value: HairColorType.red},
     {name: 'Other', value: HairColorType.other}
-  ]
+  ];
   patientPhototypes: {name: string; value: PatientPhototype}[] =[
     {name: 'I', value: PatientPhototype.I},
     {name: 'II', value: PatientPhototype.II},
     {name: 'III', value: PatientPhototype.III},
     {name: 'IV', value: PatientPhototype.IV}
-  ]
+  ];
 
   constructor(
     private router: Router,

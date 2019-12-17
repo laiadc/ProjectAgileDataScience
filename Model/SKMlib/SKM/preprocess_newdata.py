@@ -1,5 +1,4 @@
 import pandas as pd
-from cleaning import missingData
 
 
 def preprocess_newdata(dataset):
