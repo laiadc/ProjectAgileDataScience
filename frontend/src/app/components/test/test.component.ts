@@ -49,27 +49,27 @@ export class TestComponent implements OnInit {
     },
     {// low
       backgroundColor: 'rgba(0,0,0,0)',
-      borderColor: 'rgba(61,171,255,1)',
-      pointBackgroundColor: 'rgba(61,171,255,0)',
-      pointBorderColor: 'rgba(61,171,255,0)',
-      pointHoverBackgroundColor: 'rgba(61,171,255,0.5)',
-      pointHoverBorderColor: 'rgba(61,171,255,0.8)'
+      borderColor: 'rgba(109,200,163,1)',
+      pointBackgroundColor: 'rgba(109,200,163,0)',
+      pointBorderColor: 'rgba(109,200,163,0)',
+      pointHoverBackgroundColor: 'rgba(109,200,163,0.5)',
+      pointHoverBorderColor: 'rgba(109,200,163,0.8)'
     },
     {//medium
       backgroundColor: 'rgba(0,0,0,0)',
-      borderColor: 'rgba(255,174,61,1)',
-      pointBackgroundColor: 'rgba(255,174,61,0)',
-      pointBorderColor: 'rgba(255,174,61,0)',
-      pointHoverBackgroundColor: 'rgba(255,174,61,0.5)',
-      pointHoverBorderColor: 'rgba(255,174,61,0.8)'
+      borderColor: 'rgba(145,143,202,1)',
+      pointBackgroundColor: 'rgba(145,143,202,0)',
+      pointBorderColor: 'rgba(145,143,202,0)',
+      pointHoverBackgroundColor: 'rgba(145,143,202,0.5)',
+      pointHoverBorderColor: 'rgba(145,143,202,0.8)'
     },
     {//high
       backgroundColor: 'rgba(0,0,0,0)',
-      borderColor: 'rgba(171,14,0,1)',
-      pointBackgroundColor: 'rgba(171,14,0,0)',
-      pointBorderColor: 'rgba(171,14,0,0)',
-      pointHoverBackgroundColor: 'rgba(171,14,0,0.5)',
-      pointHoverBorderColor: 'rgba(171,14,0,0.8)'
+      borderColor: 'rgba(242,99,99,1)',
+      pointBackgroundColor: 'rgba(242,99,99,0)',
+      pointBorderColor: 'rgba(242,99,99,0)',
+      pointHoverBackgroundColor: 'rgba(242,99,99,0.5)',
+      pointHoverBorderColor: 'rgba(242,99,99,0.8)'
     }
   ];
 

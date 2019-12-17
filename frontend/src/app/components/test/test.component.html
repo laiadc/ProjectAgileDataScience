@@ -120,9 +120,9 @@
     </div>
     <div class="list-tests-container">
         <strong *ngIf="processing">Processing...</strong>
-            <strong *ngIf="!processing && test.risk == 1" style="color: green;">Low</strong>
-            <strong *ngIf="!processing && test.risk == 2" style="color: orange;">Medium</strong>
-            <strong *ngIf="!processing && test.risk == 3" style="color: orangered;">High</strong>
+            <strong *ngIf="!processing && test.risk == 1" style="color: rgba(109,200,163,1);">Low</strong>
+            <strong *ngIf="!processing && test.risk == 2" style="color: rgba(145,143,202,1);">Medium</strong>
+            <strong *ngIf="!processing && test.risk == 3" style="color: rgba(242,99,99,1);">High</strong>
     </div>
 
     <div class="title">
@@ -137,11 +137,5 @@
         <div *ngIf="processing">
             <p> Processing graphics... </p>
         </div>
-    </div>
-    <div class="title">
-        Most important variables
-    </div>
-    <div class="list-tests-container">
-
     </div>
 </div>
